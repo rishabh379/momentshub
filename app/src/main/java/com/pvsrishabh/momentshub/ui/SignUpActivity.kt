@@ -138,6 +138,7 @@ class SignUpActivity : AppCompatActivity() {
                             user.name = binding.name.editText?.text.toString()
                             user.password = binding.password.editText?.text.toString()
                             user.email = binding.email.editText?.text.toString()
+                            user.userId = Firebase.auth.currentUser!!.uid
 
                             val db = Firebase.firestore
                             db.collection(USER_NODE).document(Firebase.auth.currentUser!!.uid)

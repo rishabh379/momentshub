@@ -20,7 +20,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:title="MomentsHub"
-        app:titleMarginStart="30dp"
+        app:titleMarginStart="20dp"
+        android:layout_marginEnd="7dp"
         app:titleTextColor="@color/black" />
 
     <androidx.core.widget.NestedScrollView

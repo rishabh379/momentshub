@@ -1,9 +1,11 @@
 package com.pvsrishabh.momentshub.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
@@ -23,6 +25,7 @@ import com.pvsrishabh.momentshub.Utils.USER_NODE
 import com.pvsrishabh.momentshub.adapters.FollowAdapter
 import com.pvsrishabh.momentshub.adapters.PostAdapter
 import com.pvsrishabh.momentshub.databinding.FragmentHomeBinding
+import com.pvsrishabh.momentshub.ui.ChatActivity
 
 class HomeFragment : Fragment() {
 
@@ -87,7 +90,6 @@ class HomeFragment : Fragment() {
             postList.addAll(tempList)
             postAdapter.notifyDataSetChanged()
         }
-
         return binding.root
     }
 
@@ -98,5 +100,18 @@ class HomeFragment : Fragment() {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.option_menu,menu)
         super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    @Deprecated("Deprecated in Java")
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            // Handle other menu items if needed
+            R.id.message -> {
+                // Handle click on menu item
+                startActivity(Intent(requireContext(),ChatActivity::class.java))
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 }
