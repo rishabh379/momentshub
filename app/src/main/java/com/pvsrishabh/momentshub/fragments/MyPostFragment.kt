@@ -10,9 +10,10 @@ import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
 import com.google.firebase.firestore.firestore
 import com.google.firebase.firestore.toObject
-import com.pvsrishabh.momentshub.Models.Post
+import com.pvsrishabh.momentshub.models.Post
 import com.pvsrishabh.momentshub.adapters.MyPostRvAdapter
 import com.pvsrishabh.momentshub.databinding.FragmentMyPostBinding
+import com.pvsrishabh.momentshub.utils.POST
 
 class MyPostFragment : Fragment() {
     private lateinit var binding: FragmentMyPostBinding
@@ -29,7 +30,7 @@ class MyPostFragment : Fragment() {
             StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
         binding.rv.adapter = adapter
 
-        Firebase.firestore.collection(Firebase.auth.currentUser!!.uid).get().addOnSuccessListener {
+        Firebase.firestore.collection(Firebase.auth.currentUser!!.uid+POST).get().addOnSuccessListener {
             val tempList = arrayListOf<Post>()
             for(i in it.documents){
                 val post: Post = i.toObject<Post>()!!

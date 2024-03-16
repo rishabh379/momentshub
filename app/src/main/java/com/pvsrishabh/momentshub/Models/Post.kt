@@ -1,4 +1,4 @@
-package com.pvsrishabh.momentshub.Models
+package com.pvsrishabh.momentshub.models
 
 class Post {
     var postUrl:String=""

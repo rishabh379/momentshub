@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.pvsrishabh.momentshub.Models.Reel
+import com.pvsrishabh.momentshub.models.Reel
 import com.pvsrishabh.momentshub.databinding.MyReelRvDesignBinding
 
 class MyReelRvAdapter(var context: Context, var reelList: ArrayList<Reel>) : RecyclerView.Adapter<MyReelRvAdapter.ViewHolder>(){

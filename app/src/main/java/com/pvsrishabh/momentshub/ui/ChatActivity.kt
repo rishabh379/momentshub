@@ -8,9 +8,8 @@ import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
 import com.google.firebase.firestore.firestore
 import com.google.firebase.firestore.toObject
-import com.pvsrishabh.momentshub.Models.User
-import com.pvsrishabh.momentshub.Utils.FOLLOW
-import com.pvsrishabh.momentshub.Utils.USER_NODE
+import com.pvsrishabh.momentshub.models.User
+import com.pvsrishabh.momentshub.utils.FOLLOW
 import com.pvsrishabh.momentshub.adapters.MessageAdapter
 import com.pvsrishabh.momentshub.databinding.ActivityChatBinding
 

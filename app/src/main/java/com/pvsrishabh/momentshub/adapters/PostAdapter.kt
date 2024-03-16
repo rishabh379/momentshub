@@ -11,10 +11,10 @@ import com.github.marlonlom.utilities.timeago.TimeAgo
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.firestore
 import com.google.firebase.firestore.toObject
-import com.pvsrishabh.momentshub.Models.Post
-import com.pvsrishabh.momentshub.Models.User
+import com.pvsrishabh.momentshub.models.Post
+import com.pvsrishabh.momentshub.models.User
 import com.pvsrishabh.momentshub.R
-import com.pvsrishabh.momentshub.Utils.USER_NODE
+import com.pvsrishabh.momentshub.utils.USER_NODE
 import com.pvsrishabh.momentshub.databinding.PostRvBinding
 
 class PostAdapter(var context: Context, var postList: ArrayList<Post>) :

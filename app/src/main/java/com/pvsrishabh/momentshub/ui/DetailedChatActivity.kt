@@ -7,8 +7,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
-import com.pvsrishabh.momentshub.Models.Message
-import com.pvsrishabh.momentshub.Utils.CHAT
+import com.pvsrishabh.momentshub.models.Message
+import com.pvsrishabh.momentshub.utils.CHAT
 import com.pvsrishabh.momentshub.adapters.ChatAdapter
 import com.pvsrishabh.momentshub.databinding.ActivityDetailedChatBinding
 

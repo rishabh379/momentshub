@@ -8,8 +8,8 @@ import androidx.fragment.app.Fragment
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.firestore
 import com.google.firebase.firestore.toObject
-import com.pvsrishabh.momentshub.Models.Reel
-import com.pvsrishabh.momentshub.Utils.REEL
+import com.pvsrishabh.momentshub.models.Reel
+import com.pvsrishabh.momentshub.utils.REEL
 import com.pvsrishabh.momentshub.adapters.ReelAdapter
 import com.pvsrishabh.momentshub.databinding.FragmentReelBinding
 

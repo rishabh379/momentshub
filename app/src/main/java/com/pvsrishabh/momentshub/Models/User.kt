@@ -1,4 +1,4 @@
-package com.pvsrishabh.momentshub.Models
+package com.pvsrishabh.momentshub.models
 
 class User{
     var image:String? = null
@@ -6,7 +6,6 @@ class User{
     var email:String? = null
     var password:String? = null
     var userId: String? = null
-    var lastMessage: String? = null
 
     constructor()
 

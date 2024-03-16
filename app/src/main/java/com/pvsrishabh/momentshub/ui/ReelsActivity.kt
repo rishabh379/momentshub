@@ -9,12 +9,12 @@ import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
 import com.google.firebase.firestore.firestore
 import com.google.firebase.firestore.toObject
-import com.pvsrishabh.momentshub.Models.Reel
-import com.pvsrishabh.momentshub.Models.User
-import com.pvsrishabh.momentshub.Utils.REEL
-import com.pvsrishabh.momentshub.Utils.REEL_FOLDER
-import com.pvsrishabh.momentshub.Utils.USER_NODE
-import com.pvsrishabh.momentshub.Utils.uploadVideo
+import com.pvsrishabh.momentshub.models.Reel
+import com.pvsrishabh.momentshub.models.User
+import com.pvsrishabh.momentshub.utils.REEL
+import com.pvsrishabh.momentshub.utils.REEL_FOLDER
+import com.pvsrishabh.momentshub.utils.USER_NODE
+import com.pvsrishabh.momentshub.utils.uploadVideo
 import com.pvsrishabh.momentshub.databinding.ActivityReelsBinding
 
 class ReelsActivity : AppCompatActivity() {
@@ -27,6 +27,7 @@ class ReelsActivity : AppCompatActivity() {
         uri?.let {
             uploadVideo(uri, REEL_FOLDER, progressDialog) { url ->
                 if (url != null) {
+                    binding.postBtn.isEnabled = true
                     videoUrl = url
                 }
             }
@@ -48,17 +49,18 @@ class ReelsActivity : AppCompatActivity() {
             finish()
         }
 
-
         binding.selectReel.setOnClickListener {
             launcher.launch("video/*")
         }
 
-        binding.postBtn.setOnClickListener {
+        binding.postBtn.isEnabled = false
 
+        binding.postBtn.setOnClickListener {
             Firebase.firestore.collection(USER_NODE).document(Firebase.auth.currentUser!!.uid)
                 .get().addOnSuccessListener {
                     val user = it.toObject<User>()!!
-                    val reel: Reel = Reel(videoUrl!!, binding.caption.editText?.text.toString(),user.image!!)
+                    val reel = Reel(videoUrl, binding.caption.editText?.text.toString())
+                    reel.profileLink = user.image
                     Firebase.firestore.collection(REEL).document().set(reel).addOnSuccessListener {
                         Firebase.firestore.collection(Firebase.auth.currentUser!!.uid+REEL).document().set(reel)
                             .addOnSuccessListener {

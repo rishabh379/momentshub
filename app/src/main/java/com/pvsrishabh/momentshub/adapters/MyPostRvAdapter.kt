@@ -4,7 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.pvsrishabh.momentshub.Models.Post
+import com.pvsrishabh.momentshub.models.Post
 import com.pvsrishabh.momentshub.databinding.MyPostRvDesignBinding
 import com.squareup.picasso.Picasso
 

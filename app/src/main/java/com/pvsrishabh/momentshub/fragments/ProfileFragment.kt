@@ -10,9 +10,9 @@ import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
 import com.google.firebase.firestore.firestore
 import com.google.firebase.firestore.toObject
-import com.pvsrishabh.momentshub.Models.User
+import com.pvsrishabh.momentshub.models.User
 import com.pvsrishabh.momentshub.ui.SignUpActivity
-import com.pvsrishabh.momentshub.Utils.USER_NODE
+import com.pvsrishabh.momentshub.utils.USER_NODE
 import com.pvsrishabh.momentshub.adapters.ViewPagerAdapter
 import com.pvsrishabh.momentshub.databinding.FragmentProfileBinding
 import com.squareup.picasso.Picasso

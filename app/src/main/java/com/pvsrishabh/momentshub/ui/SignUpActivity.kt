@@ -14,10 +14,10 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
 import com.google.firebase.firestore.firestore
 import com.google.firebase.firestore.toObject
-import com.pvsrishabh.momentshub.Models.User
-import com.pvsrishabh.momentshub.Utils.USER_NODE
-import com.pvsrishabh.momentshub.Utils.USER_PROFILE_FOLDER
-import com.pvsrishabh.momentshub.Utils.uploadImage
+import com.pvsrishabh.momentshub.models.User
+import com.pvsrishabh.momentshub.utils.USER_NODE
+import com.pvsrishabh.momentshub.utils.USER_PROFILE_FOLDER
+import com.pvsrishabh.momentshub.utils.uploadImage
 import com.pvsrishabh.momentshub.databinding.ActivitySignUpBinding
 import com.squareup.picasso.Picasso
 

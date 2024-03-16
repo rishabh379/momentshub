@@ -9,9 +9,9 @@ import com.bumptech.glide.Glide
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
 import com.google.firebase.firestore.firestore
-import com.pvsrishabh.momentshub.Models.User
+import com.pvsrishabh.momentshub.models.User
 import com.pvsrishabh.momentshub.R
-import com.pvsrishabh.momentshub.Utils.FOLLOW
+import com.pvsrishabh.momentshub.utils.FOLLOW
 import com.pvsrishabh.momentshub.databinding.SearchRvBinding
 
 class SearchAdapter(var context: Context, var userList: ArrayList<User>) :

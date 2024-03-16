@@ -6,7 +6,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
-import com.pvsrishabh.momentshub.Models.User
+import com.pvsrishabh.momentshub.models.User
 import com.pvsrishabh.momentshub.databinding.ActivityLoginBinding
 
 class LoginActivity : AppCompatActivity() {

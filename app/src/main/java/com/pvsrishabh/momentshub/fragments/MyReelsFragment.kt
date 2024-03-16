@@ -4,15 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
 import com.google.firebase.firestore.firestore
 import com.google.firebase.firestore.toObject
-import com.pvsrishabh.momentshub.Models.Reel
-import com.pvsrishabh.momentshub.Utils.REEL
+import com.pvsrishabh.momentshub.models.Reel
+import com.pvsrishabh.momentshub.utils.REEL
 import com.pvsrishabh.momentshub.adapters.MyReelRvAdapter
 import com.pvsrishabh.momentshub.databinding.FragmentMyReelsBinding
 

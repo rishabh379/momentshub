@@ -8,8 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.github.marlonlom.utilities.timeago.TimeAgo
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.pvsrishabh.momentshub.Models.Message
-import com.pvsrishabh.momentshub.Utils.CHAT
+import com.pvsrishabh.momentshub.models.Message
+import com.pvsrishabh.momentshub.utils.CHAT
 import com.pvsrishabh.momentshub.databinding.SampleReceiverBinding
 import com.pvsrishabh.momentshub.databinding.SampleSenderBinding
 

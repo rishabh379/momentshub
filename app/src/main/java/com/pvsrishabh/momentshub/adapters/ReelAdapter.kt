@@ -1,12 +1,11 @@
 package com.pvsrishabh.momentshub.adapters
 
 import android.content.Context
-import android.opengl.Visibility
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.pvsrishabh.momentshub.Models.Reel
+import com.pvsrishabh.momentshub.models.Reel
 import com.pvsrishabh.momentshub.R
 import com.pvsrishabh.momentshub.databinding.ReelDesignBinding
 import com.squareup.picasso.Picasso
