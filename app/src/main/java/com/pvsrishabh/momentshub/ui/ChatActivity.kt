@@ -41,7 +41,7 @@ class ChatActivity : AppCompatActivity() {
         binding.rvMsg.adapter = adapter
 
         val currentUser: String = Firebase.auth.currentUser!!.uid
-        Firebase.firestore.collection(Firebase.auth.currentUser!!.uid + FOLLOW).get().addOnSuccessListener {
+        Firebase.firestore.collection(currentUser+FOLLOW).get().addOnSuccessListener {
             val tempList = ArrayList<User>()
             userList.clear()
             for(i in it.documents){

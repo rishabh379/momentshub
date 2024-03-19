@@ -34,6 +34,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:gravity="center_horizontal"
         android:paddingLeft="3dp"
         android:paddingRight="3dp"
         android:layout_marginHorizontal="7dp"
@@ -41,34 +42,53 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bg_edittext">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-            <ImageButton
-                android:id="@+id/shareImg"
-                android:layout_width="40dp"
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_edittext"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/send"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageButton
+                    android:id="@+id/shareImg"
+                    android:layout_width="40dp"
+                    android:layout_height="50dp"
+                    android:backgroundTint="@color/white"
+                    android:src="@drawable/ic_share" />
+
+                <EditText
+                    android:id="@+id/etMessage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint=" Enter your Message"
+                    android:inputType="textPersonName"
+                    android:padding="10dp" />
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/send"
+                android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:backgroundTint="@color/white"
-                android:src="@drawable/ic_share" />
+                android:layout_gravity="end"
+                android:paddingStart="7dp"
+                android:src="@drawable/ic_send"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.5" />
 
-            <EditText
-                android:id="@+id/etMessage"
-                android:layout_width="285dp"
-                android:layout_height="match_parent"
-                android:hint=" Enter your Message"
-                android:inputType="textPersonName"
-                android:padding="10dp" />
 
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <ImageView
-            android:id="@+id/send"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:paddingStart="7dp"
-            android:src="@drawable/ic_send" />
 
 
     </LinearLayout>

@@ -26,6 +26,7 @@ import com.pvsrishabh.momentshub.adapters.FollowAdapter
 import com.pvsrishabh.momentshub.adapters.PostAdapter
 import com.pvsrishabh.momentshub.databinding.FragmentHomeBinding
 import com.pvsrishabh.momentshub.ui.ChatActivity
+import com.pvsrishabh.momentshub.ui.LikedPostsActivity
 
 class HomeFragment : Fragment() {
 
@@ -85,6 +86,7 @@ class HomeFragment : Fragment() {
             postList.clear()
             for (i in it.documents) {
                 val post: Post = i.toObject<Post>()!!
+                post.docId = i.id
                 tempList.add(post)
             }
             postList.addAll(tempList)
@@ -109,6 +111,11 @@ class HomeFragment : Fragment() {
             R.id.message -> {
                 // Handle click on menu item
                 startActivity(Intent(requireContext(),ChatActivity::class.java))
+                true
+            }
+            R.id.like -> {
+                // Handle click on menu item
+                startActivity(Intent(requireContext(),LikedPostsActivity::class.java))
                 true
             }
             else -> super.onOptionsItemSelected(item)

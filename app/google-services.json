@@ -12,7 +12,20 @@
           "package_name": "com.pvsrishabh.momentshub"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "998162591486-krvg6eap8rp0gsg8kallitl14j4esvcb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.pvsrishabh.momentshub",
+            "certificate_hash": "b5515ad4b3d9e7b6ce437d64d72468ffb984cd69"
+          }
+        },
+        {
+          "client_id": "998162591486-cl86vjo5403hiucgujbh2omes1hb0ecp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyC7Y6dDL2aV3mNB9Xw81s8m6iT84HKDKg0"
@@ -20,7 +33,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "998162591486-cl86vjo5403hiucgujbh2omes1hb0ecp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

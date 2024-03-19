@@ -4,6 +4,7 @@ class Post {
     var postUrl:String=""
     var caption:String=""
     var uid: String=""
+    var docId: String? = ""
     var time: String=""
 
     constructor()
