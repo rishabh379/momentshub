@@ -1,24 +1,32 @@
-# MomentsHub
+# MomentsHub 
 
-MomentsHub is a social media application designed to bring people together through shared moments and experiences. With a sleek interface and robust features, MomentsHub aims to provide users with an immersive and engaging social networking experience. Whether you're looking to discover new content, connect with friends, or share your own creations, MomentsHub has you covered.
+MomentsHub is an upgraded social media application designed to foster connections and facilitate the sharing of moments and experiences among users. With an enhanced feature set and seamless user experience, MomentsHub aims to redefine social networking by prioritizing interaction and personalization.
 
 ## Features
 
-1. Splash Screen: Experience a visually stunning splash screen reminiscent of Instagram, setting the tone for your journey through MomentsHub.
+1. Splash Screen: Experience an eye-catching splash screen upon launching MomentsHub, setting the stage for a captivating journey through the app.
 
-2. Sign Up and Login: Easily create an account or log in using your phone number, email, or password, ensuring a seamless onboarding process.
+2. Sign Up and Login: Seamlessly create an account or log in using your phone number, email, or through Google authentication, ensuring a hassle-free onboarding process.
 
-3. Home Page: Explore a diverse array of posts and reels curated from creators across various topics. Stay updated on the latest trends and happenings in the social media world.
+3. Home Page: Discover a diverse array of posts, reels, and saved content from creators across various topics, ensuring you stay updated on the latest trends and happenings in your network.
 
-4. Search Feature: Find and connect with users by searching for their usernames, making it simple to discover and follow new accounts.
+4. Search Feature: Easily find and connect with users by searching for their usernames or names, facilitating the discovery of new accounts to follow and engage with.
 
-5. Editable Profile: Customize your profile with ease, including options to edit your username, name, profile picture, and more, giving you full control over your digital identity.
+5. Profile Customization: Personalize your profile by editing your username, name, profile picture, and bio, allowing you to showcase your identity and interests to the MomentsHub community.
 
-6. Follow Feature: Follow other users and build your network within the MomentsHub community. Additionally, manage your connections with the unfollow feature, ensuring your feed remains tailored to your interests.
+6. Follow and Unfollow: Follow other users to stay updated on their content and unfollow them at any time to tailor your feed to your preferences.
 
-7. Uploading and Posting: Share your own content with the world by uploading posts and reels directly from your device, allowing you to express yourself creatively and authentically.
+7. Upload and Post: Share your moments with the world by uploading posts, reels, and saved content directly from your device, enabling you to express yourself creatively and authentically.
 
-8. Like, Comment & Share Feature: Engage with others by liking, commenting, and sharing posts and reels from fellow users, fostering a sense of community and interaction within MomentsHub.
+8. Like and Share: Engage with fellow users by liking and sharing their posts and reels, fostering community interaction and connection within MomentsHub.
+
+9. Save and Bookmark: Save posts and reels that resonate with you for later viewing, ensuring you can revisit your favorite content whenever you desire.
+
+10. Messaging: Communicate with other users through text or image messages, facilitating private conversations and connections within the MomentsHub community.
+
+11. Logout Option: Securely log out of your account to ensure the privacy and security of your MomentsHub profile and data.
+
+12. Profile Update: Easily update your profile information and settings to reflect any changes in your identity or preferences.
 
 ## Technology
 
@@ -26,14 +34,18 @@ MomentsHub is a social media application designed to bring people together throu
 
 2. Kotlin: Built with Kotlin, MomentsHub benefits from the language's efficiency and developer-friendly syntax, enabling smooth performance and streamlined development processes for enhanced productivity.
 
+3. Android Studio: Developed using Android Studio, MomentsHub leverages the powerful tools and functionalities the official IDE provides for Android app development.
+
+4. Firebase: MomentsHub integrates Firebase for backend services, including authentication, real-time database, cloud storage, and more, ensuring a robust and scalable infrastructure for the application.
+
 ## Get Started
 
-To start experiencing MomentsHub and connecting with others through shared moments, simply download the app from the App Store or Google Play Store and create your account today! Join our vibrant community and embark on a journey of discovery, creativity, and connection.
+To start exploring MomentsHub and connecting with others through shared moments, download the app from the App Store or Google Play Store and create your account today! Join our vibrant community and embark on a journey of discovery, creativity, and connection.
 
 [Download MomentsHub](#) (Coming Soon)
 
 ## Feedback
 
-We're constantly striving to improve MomentsHub and enhance your social media experience. If you have any feedback, suggestions, or encounter any issues while using the app, please don't hesitate to reach out to our support team. Your input is invaluable as we work towards making MomentsHub the best it can be for our users.
+We're committed to continually improving MomentsHub and enhancing your social media experience. If you have any feedback, suggestions, or encounter any issues while using the app, please reach out to our support team. Your input is invaluable as we strive to make MomentsHub the best it can be for our users.
 
 Thank you for choosing MomentsHub! We look forward to sharing unforgettable moments with you.
