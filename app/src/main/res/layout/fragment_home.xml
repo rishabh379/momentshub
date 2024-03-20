@@ -4,16 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
     tools:context=".fragments.HomeFragment">
-
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/materialToolbar2"
-        style="@style/Base.Theme.MomentsHub"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintEnd_toEndOf="parent"
@@ -21,8 +17,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:title="MomentsHub"
         app:titleMarginStart="20dp"
-        android:layout_marginEnd="7dp"
-        app:titleTextColor="@color/black" />
+        android:layout_marginEnd="7dp"/>
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nestedScrollView"

@@ -6,4 +6,7 @@
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="fontFamily">@font/aldrich</item>
     </style>
+
+    <style name="Theme.MomentsHub" parent="Base.Theme.MomentsHub" />
+
 </resources>

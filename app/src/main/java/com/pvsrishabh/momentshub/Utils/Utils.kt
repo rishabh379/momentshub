@@ -124,3 +124,9 @@ fun uploadVideo(uri: Uri, folderName: String, progressDialog: ProgressDialog, ca
 
         }
 }
+
+fun extractAndTrimFirstString(message: String): String {
+    val regex = Regex("""\w+""")
+    val matchResult = regex.find(message)
+    return matchResult?.value?.trim() ?: ""
+}

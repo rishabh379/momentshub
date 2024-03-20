@@ -101,7 +101,10 @@ class OthersProfileActivity : AppCompatActivity() {
 
                             val currentCountText = binding.followersCount.text.toString()
                             val currentCount = currentCountText.toIntOrNull() ?: 0
-                            val newCount = currentCount - 1
+                            var newCount = currentCount - 1
+                            if(newCount < 0){
+                                newCount = 1
+                            }
                             binding.followersCount.text = newCount.toString()
 
                             changeFollowersCount(-1,uid)

@@ -8,6 +8,7 @@ import com.bumptech.glide.Glide
 import com.pvsrishabh.momentshub.models.User
 import com.pvsrishabh.momentshub.R
 import com.pvsrishabh.momentshub.databinding.StoryRvDesignBinding
+import com.pvsrishabh.momentshub.utils.extractAndTrimFirstString
 
 class FollowAdapter(var context: Context, var followList: ArrayList<User>) : RecyclerView.Adapter<FollowAdapter.ViewHolder>(){
     inner class ViewHolder(var binding: StoryRvDesignBinding) : RecyclerView.ViewHolder(binding.root)
@@ -23,7 +24,6 @@ class FollowAdapter(var context: Context, var followList: ArrayList<User>) : Rec
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         Glide.with(context).load(followList[position].image).placeholder(R.drawable.user_icon).into(holder.binding.profileImage)
-        holder.binding.name.text = followList[position].name.toString()
+        holder.binding.name.text = extractAndTrimFirstString(followList[position].name.toString())
     }
-
 }

@@ -1,6 +1,7 @@
 package com.pvsrishabh.momentshub.adapters
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
@@ -13,6 +14,7 @@ import com.google.firebase.firestore.firestore
 import com.pvsrishabh.momentshub.R
 import com.pvsrishabh.momentshub.databinding.SearchRvBinding
 import com.pvsrishabh.momentshub.models.User
+import com.pvsrishabh.momentshub.ui.OthersProfileActivity
 import com.pvsrishabh.momentshub.utils.FOLLOW
 import com.pvsrishabh.momentshub.utils.USER_NODE
 import com.pvsrishabh.momentshub.utils.changeFollowersCount

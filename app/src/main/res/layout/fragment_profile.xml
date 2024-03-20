@@ -7,22 +7,19 @@
     android:orientation="vertical"
     tools:context=".fragments.ProfileFragment">
 
-
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/materialToolbar2"
         style="@style/Base.Theme.MomentsHub"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginEnd="7dp"
-        android:background="@color/white"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:title="MomentsHub"
-        app:titleMarginStart="20dp"
-        app:titleTextColor="@color/black" />
+        app:titleMarginStart="20dp"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -31,8 +28,8 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profile_image"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:src="@drawable/user"
@@ -53,9 +50,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:maxWidth="180dp"
+            android:maxWidth="220dp"
             android:text="Bio"
+            app:layout_constraintHorizontal_bias="0"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/edit_profile"
             app:layout_constraintStart_toStartOf="@+id/tv_name"
             app:layout_constraintTop_toBottomOf="@+id/tv_name" />
 
