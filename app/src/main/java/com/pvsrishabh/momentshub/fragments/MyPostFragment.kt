@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.google.firebase.Firebase
-import com.google.firebase.auth.auth
 import com.google.firebase.firestore.firestore
 import com.google.firebase.firestore.toObject
 import com.pvsrishabh.momentshub.models.Post
@@ -15,7 +14,7 @@ import com.pvsrishabh.momentshub.adapters.MyPostRvAdapter
 import com.pvsrishabh.momentshub.databinding.FragmentMyPostBinding
 import com.pvsrishabh.momentshub.utils.POST
 
-class MyPostFragment : Fragment() {
+class MyPostFragment(val uid: String) : Fragment() {
     private lateinit var binding: FragmentMyPostBinding
 
     override fun onCreateView(
@@ -30,7 +29,7 @@ class MyPostFragment : Fragment() {
             StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
         binding.rv.adapter = adapter
 
-        Firebase.firestore.collection(Firebase.auth.currentUser!!.uid+POST).get().addOnSuccessListener {
+        Firebase.firestore.collection(uid+POST).get().addOnSuccessListener {
             val tempList = arrayListOf<Post>()
             for(i in it.documents){
                 val post: Post = i.toObject<Post>()!!
@@ -44,6 +43,5 @@ class MyPostFragment : Fragment() {
     }
 
     companion object {
-
     }
 }

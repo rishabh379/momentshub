@@ -7,6 +7,9 @@ class User{
     var password:String? = null
     var userId: String? = null
     var bio: String? = null
+    var postCount: Long? = null
+    var followingCount: Long? = null
+    var followersCount: Long? = null
 
     constructor()
 

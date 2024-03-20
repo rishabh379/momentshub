@@ -15,7 +15,7 @@ import com.pvsrishabh.momentshub.utils.REEL
 import com.pvsrishabh.momentshub.adapters.MyReelRvAdapter
 import com.pvsrishabh.momentshub.databinding.FragmentMyReelsBinding
 
-class MyReelsFragment : Fragment() {
+class MyReelsFragment(val uid: String) : Fragment() {
 
     private lateinit var binding: FragmentMyReelsBinding
 
@@ -32,7 +32,7 @@ class MyReelsFragment : Fragment() {
             StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
         binding.rv.adapter = adapter
 
-        Firebase.firestore.collection(Firebase.auth.currentUser!!.uid + REEL).get()
+        Firebase.firestore.collection(uid + REEL).get()
             .addOnSuccessListener {
                 val tempList = arrayListOf<Reel>()
                 for (i in it.documents) {

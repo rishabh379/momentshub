@@ -9,16 +9,14 @@ import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
 import com.google.firebase.firestore.firestore
 import com.google.firebase.firestore.toObject
-import com.pvsrishabh.momentshub.R
+import com.pvsrishabh.momentshub.databinding.ActivityPostBinding
 import com.pvsrishabh.momentshub.models.Post
 import com.pvsrishabh.momentshub.models.User
 import com.pvsrishabh.momentshub.utils.POST
 import com.pvsrishabh.momentshub.utils.POST_FOLDER
 import com.pvsrishabh.momentshub.utils.USER_NODE
+import com.pvsrishabh.momentshub.utils.changePostCount
 import com.pvsrishabh.momentshub.utils.uploadImage
-import com.pvsrishabh.momentshub.databinding.ActivityPostBinding
-import com.pvsrishabh.momentshub.utils.REEL_FOLDER
-import com.pvsrishabh.momentshub.utils.uploadVideo
 
 class PostActivity : AppCompatActivity() {
     private val binding by lazy {
@@ -71,10 +69,14 @@ class PostActivity : AppCompatActivity() {
                         System.currentTimeMillis().toString()
                     )
 
-                    Firebase.firestore.collection(POST).document().set(post).addOnSuccessListener {
-                        Firebase.firestore.collection(Firebase.auth.currentUser!!.uid+POST).document()
+                    val db = Firebase.firestore
+                    val uid = Firebase.auth.currentUser!!
+
+                    db.collection(POST).document().set(post).addOnSuccessListener {
+                        db.collection(uid.uid + POST).document()
                             .set(post)
                             .addOnSuccessListener {
+                                changePostCount(1)
                                 startActivity(
                                     Intent(this@PostActivity, HomeActivity::class.java)
                                 )

@@ -3,16 +3,20 @@ package com.pvsrishabh.momentshub.adapters
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
 import com.google.firebase.firestore.firestore
-import com.pvsrishabh.momentshub.models.User
 import com.pvsrishabh.momentshub.R
-import com.pvsrishabh.momentshub.utils.FOLLOW
 import com.pvsrishabh.momentshub.databinding.SearchRvBinding
+import com.pvsrishabh.momentshub.models.User
+import com.pvsrishabh.momentshub.utils.FOLLOW
+import com.pvsrishabh.momentshub.utils.USER_NODE
+import com.pvsrishabh.momentshub.utils.changeFollowersCount
+import com.pvsrishabh.momentshub.utils.changeFollowingCount
 
 class SearchAdapter(var context: Context, var userList: ArrayList<User>) :
     RecyclerView.Adapter<SearchAdapter.ViewHolder>() {
@@ -43,7 +47,7 @@ class SearchAdapter(var context: Context, var userList: ArrayList<User>) :
             .whereEqualTo("email", userList[position].email).get().addOnSuccessListener {
                 if (it.documents.size != 0) {
                     holder.binding.follow.text = "Unfollow"
-                    holder.binding.follow.backgroundTintList=
+                    holder.binding.follow.backgroundTintList =
                         ContextCompat.getColorStateList(context, R.color.gray)
                     isFollow = true
                 } else {
@@ -59,20 +63,27 @@ class SearchAdapter(var context: Context, var userList: ArrayList<User>) :
                         Firebase.firestore.collection(Firebase.auth.currentUser!!.uid + FOLLOW)
                             .document(it.documents[0].id).delete()
                         holder.binding.follow.text = "Follow"
-                        holder.binding.follow.backgroundTintList=
+                        changeFollowingCount(-1)
+                        changeFollowersCount(-1,userList[position].userId!!)
+//                        changeFollowersCount(-1, userList[position].userId!!)
+                        holder.binding.follow.backgroundTintList =
                             ContextCompat.getColorStateList(context, R.color.blue)
-                        isFollow=false
+                        isFollow = false
                     }
             } else {
                 Firebase.firestore.collection(Firebase.auth.currentUser!!.uid + FOLLOW).document()
                     .set(userList[position]).addOnSuccessListener {
                         holder.binding.follow.text = "Unfollow"
-                        holder.binding.follow.backgroundTintList=
+
+                        // increase followers count of the user
+                        changeFollowersCount(1,userList[position].userId!!)
+                        changeFollowingCount(1)
+
+                        holder.binding.follow.backgroundTintList =
                             ContextCompat.getColorStateList(context, R.color.gray)
-                        isFollow=true
+                        isFollow = true
                     }
             }
-
         }
     }
 }

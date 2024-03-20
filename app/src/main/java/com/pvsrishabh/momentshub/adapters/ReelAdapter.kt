@@ -26,9 +26,14 @@ class ReelAdapter(var context: Context, var reelList: ArrayList<Reel>): Recycler
         Picasso.get().load(reelList.get(position).profileLink).placeholder(R.drawable.user).into(holder.binding.profile)
         holder.binding.caption.setText(reelList.get(position).caption)
         holder.binding.videoView.setVideoPath(reelList.get(position).videoUrl)
-        holder.binding.videoView.setOnPreparedListener {
+        holder.binding.videoView.setOnPreparedListener {mp ->
             holder.binding.progressBar.visibility = View.GONE
+            mp.isLooping = true // Set the video to loop
             holder.binding.videoView.start()
+        }
+        // Set on completion listener to restart video playback
+        holder.binding.videoView.setOnCompletionListener { mp ->
+            mp.start()
         }
     }
 }

@@ -13,6 +13,7 @@
         style="@style/Base.Theme.MomentsHub"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="7dp"
         android:background="@color/white"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
@@ -21,7 +22,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:title="MomentsHub"
         app:titleMarginStart="20dp"
-        android:layout_marginEnd="7dp"
         app:titleTextColor="@color/black" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -64,72 +64,102 @@
             style="@style/Widget.Material3.Button.Icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginRight="24dp"
             android:backgroundTint="@color/blue"
             android:text="Edit Profile"
             android:textSize="14sp"
-            android:layout_marginRight="24dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <LinearLayout
-            android:id="@+id/postLl"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center_horizontal"
-            app:layout_constraintBottom_toBottomOf="@+id/profile_image"
-            app:layout_constraintStart_toEndOf="@+id/profile_image"
-            app:layout_constraintEnd_toStartOf="@+id/followingLl"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <TextView
-                android:id="@+id/postCount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="0"
-                tools:layout_editor_absoluteX="164dp"
-                tools:layout_editor_absoluteY="85dp" />
-
-            <TextView
-                android:id="@+id/postText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="posts"
-                tools:layout_editor_absoluteX="289dp"
-                tools:layout_editor_absoluteY="82dp" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/followingLl"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center_horizontal"
-            app:layout_constraintBottom_toBottomOf="@+id/profile_image"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toEndOf="@id/profile_image"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/postLl"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="@id/profile_image"
+            app:layout_constraintBottom_toBottomOf="@id/profile_image"
+            >
 
-
-            <TextView
-                android:id="@+id/followingCount"
+            <LinearLayout
+                android:id="@+id/postLl"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="0"
-                tools:layout_editor_absoluteX="157dp"
-                tools:layout_editor_absoluteY="40dp" />
+                android:gravity="center_horizontal"
+                android:padding="20dp"
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/followingText"
+                <TextView
+                    android:id="@+id/postCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    tools:layout_editor_absoluteX="164dp"
+                    tools:layout_editor_absoluteY="85dp" />
+
+                <TextView
+                    android:id="@+id/postText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="posts"
+                    tools:layout_editor_absoluteX="289dp"
+                    tools:layout_editor_absoluteY="82dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/followersLl"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="following"
-                tools:layout_editor_absoluteX="282dp"
-                tools:layout_editor_absoluteY="33dp" />
+                android:gravity="center_horizontal"
+                android:padding="20dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/followersCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    tools:layout_editor_absoluteX="157dp"
+                    tools:layout_editor_absoluteY="40dp" />
+
+                <TextView
+                    android:id="@+id/followersText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="followers"
+                    tools:layout_editor_absoluteX="282dp"
+                    tools:layout_editor_absoluteY="33dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/followingLl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:padding="20dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/followingCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    tools:layout_editor_absoluteX="157dp"
+                    tools:layout_editor_absoluteY="40dp" />
+
+                <TextView
+                    android:id="@+id/followingText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="following"
+                    tools:layout_editor_absoluteX="282dp"
+                    tools:layout_editor_absoluteY="33dp" />
+
+            </LinearLayout>
 
         </LinearLayout>
-
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -137,7 +167,7 @@
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewPager"

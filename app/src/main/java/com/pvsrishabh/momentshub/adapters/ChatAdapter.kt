@@ -2,12 +2,16 @@ package com.pvsrishabh.momentshub.adapters
 
 import android.app.AlertDialog
 import android.content.Context
+import android.net.Uri
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.github.marlonlom.utilities.timeago.TimeAgo
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.pvsrishabh.momentshub.R
 import com.pvsrishabh.momentshub.models.Message
 import com.pvsrishabh.momentshub.utils.CHAT
 import com.pvsrishabh.momentshub.databinding.SampleReceiverBinding
@@ -63,6 +67,7 @@ class ChatAdapter(
                         .collection("messages")
                         .document(messageModel.uId)
                         .delete()
+                    notifyItemRemoved(position)
                     dialog.dismiss()
                 }
                 .setNegativeButton("No") { dialog, _ ->
@@ -73,8 +78,20 @@ class ChatAdapter(
         }
 
         if (holder is SenderViewHolder) {
+            if (messageModel.isImage) {
+                holder.binding.senderMessage.visibility = View.INVISIBLE
+                holder.setImage(messageModel.text)
+            }else{
+                holder.binding.ivMessage.visibility = View.GONE
+            }
             holder.bind(messageModel)
         } else if (holder is ReceiverViewHolder) {
+            if (messageModel.isImage) {
+                holder.binding.receiverText.visibility = View.INVISIBLE
+                holder.setImage(messageModel.text)
+            }else{
+                holder.binding.ivMessage.visibility = View.GONE
+            }
             holder.bind(messageModel)
         }
     }
@@ -83,20 +100,31 @@ class ChatAdapter(
         return messageModels.size
     }
 
-    inner class ReceiverViewHolder(private val binding: SampleReceiverBinding) :
+    inner class ReceiverViewHolder(val binding: SampleReceiverBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(messageModel: Message) {
             binding.receiverText.text = messageModel.text
             binding.receiverTime.text = messageModel.time
-
+        }
+        fun setImage(imageUrl: String) {
+            Glide.with(itemView.context)
+                .load(imageUrl)
+                .placeholder(R.drawable.loading)
+                .into(binding.ivMessage)
         }
     }
 
-    inner class SenderViewHolder(private val binding: SampleSenderBinding) :
+    inner class SenderViewHolder(val binding: SampleSenderBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(messageModel: Message) {
             binding.senderMessage.text = messageModel.text
             binding.senderTime.text = messageModel.time
+        }
+        fun setImage(imageUrl: String) {
+            Glide.with(itemView.context)
+                .load(imageUrl)
+                .placeholder(R.drawable.loading)
+                .into(binding.ivMessage)
         }
     }
 }

@@ -1,23 +1,59 @@
 package com.pvsrishabh.momentshub.ui
 
+import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
+import com.google.firebase.firestore.firestore
 import com.pvsrishabh.momentshub.models.Message
 import com.pvsrishabh.momentshub.utils.CHAT
 import com.pvsrishabh.momentshub.adapters.ChatAdapter
 import com.pvsrishabh.momentshub.databinding.ActivityDetailedChatBinding
+import com.pvsrishabh.momentshub.utils.MESSAGE_FOLDER
+import com.pvsrishabh.momentshub.utils.uploadImage
 
 class DetailedChatActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailedChatBinding
+    private var imageUrl: String? = null
+    private lateinit var progressDialog: ProgressDialog
+    private val launcher = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
+        uri?.let {
+                uploadImage(uri, MESSAGE_FOLDER, progressDialog) { url ->
+                    if (url != null) {
+                        imageUrl = url
+                        val db = Firebase.firestore
+                        val model = Message(senderId, imageUrl.toString(), System.currentTimeMillis().toString(), true)
+                        db.collection(CHAT)
+                            .document(senderRoom)
+                            .collection("messages")
+                            .add(model)
+                            .addOnSuccessListener {
+                                db.collection(CHAT)
+                                    .document(receiverRoom)
+                                    .collection("messages")
+                                    .add(model)
+                            }
+                    }
+                }
+        }
+    }
+
+    private lateinit var senderId: String
+    private lateinit var receiveId: String
+    private lateinit var receiverRoom: String
+    private lateinit var senderRoom: String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailedChatBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        progressDialog = ProgressDialog(this)
 
 // Set toolbar as action bar
         setSupportActionBar(binding.userNameToolbar)
@@ -38,8 +74,8 @@ class DetailedChatActivity : AppCompatActivity() {
             supportActionBar?.title = userName
         }
 
-        val senderId = FirebaseAuth.getInstance().uid!!
-        val receiveId = intent.getStringExtra("userId")
+        senderId = FirebaseAuth.getInstance().uid!!
+        receiveId = intent.getStringExtra("userId")!!
 
         // Declare messageModels as mutableList instead of ArrayList
         val messageModels = ArrayList<Message>()
@@ -49,8 +85,8 @@ class DetailedChatActivity : AppCompatActivity() {
         val layoutManager = LinearLayoutManager(this)
         binding.chatRecyclerView.layoutManager = layoutManager
 
-        val senderRoom = "$senderId$receiveId"
-        val receiverRoom = "$receiveId$senderId"
+        senderRoom = "$senderId$receiveId"
+        receiverRoom = "$receiveId$senderId"
 
         val db = FirebaseFirestore.getInstance()
 
@@ -100,14 +136,11 @@ class DetailedChatActivity : AppCompatActivity() {
                         .collection("messages")
                         .add(model)
                 }
-
         }
 
         binding.shareImg.setOnClickListener {
-            val intent = Intent()
-            intent.action = Intent.ACTION_GET_CONTENT
-            intent.type = "image/*"
-            startActivityForResult(intent, 33)
+            launcher.launch("image/*")
+            chatAdapter.notifyDataSetChanged()
         }
 
     }

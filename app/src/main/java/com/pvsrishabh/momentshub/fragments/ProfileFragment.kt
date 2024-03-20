@@ -2,7 +2,6 @@ package com.pvsrishabh.momentshub.fragments
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
@@ -10,6 +9,7 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.Firebase
@@ -18,17 +18,15 @@ import com.google.firebase.auth.auth
 import com.google.firebase.firestore.firestore
 import com.google.firebase.firestore.toObject
 import com.pvsrishabh.momentshub.R
-import com.pvsrishabh.momentshub.models.User
-import com.pvsrishabh.momentshub.ui.SignUpActivity
-import com.pvsrishabh.momentshub.utils.USER_NODE
 import com.pvsrishabh.momentshub.adapters.ViewPagerAdapter
 import com.pvsrishabh.momentshub.databinding.FragmentProfileBinding
-import com.pvsrishabh.momentshub.ui.ChatActivity
+import com.pvsrishabh.momentshub.models.User
 import com.pvsrishabh.momentshub.ui.EditProfileActivity
 import com.pvsrishabh.momentshub.ui.LoginActivity
 import com.pvsrishabh.momentshub.ui.SavedPostsActivity
 import com.pvsrishabh.momentshub.utils.FOLLOW
 import com.pvsrishabh.momentshub.utils.POST
+import com.pvsrishabh.momentshub.utils.USER_NODE
 import com.squareup.picasso.Picasso
 
 class ProfileFragment : Fragment() {
@@ -61,8 +59,8 @@ class ProfileFragment : Fragment() {
         auth = FirebaseAuth.getInstance()
 
         viewPagerAdapter = ViewPagerAdapter(requireActivity().supportFragmentManager)
-        viewPagerAdapter.addFragment(MyPostFragment(),"My Post")
-        viewPagerAdapter.addFragment(MyReelsFragment(),"My Reels")
+        viewPagerAdapter.addFragment(MyPostFragment(auth.uid!!),"My Post")
+        viewPagerAdapter.addFragment(MyReelsFragment(auth.uid!!),"My Reels")
         binding.viewPager.adapter = viewPagerAdapter
         binding.tabLayout.setupWithViewPager(binding.viewPager)
 
@@ -79,6 +77,7 @@ class ProfileFragment : Fragment() {
 
         db.collection(USER_NODE).document(Firebase.auth.currentUser!!.uid).get().addOnSuccessListener {
             val user: User = it.toObject<User>()!!
+            binding.materialToolbar2.title = user.name
             tUser = user
             binding.tvName.text = user.name
             if(user.bio == null){
@@ -86,20 +85,14 @@ class ProfileFragment : Fragment() {
             }else{
                 binding.tvBio.text = user.bio
             }
+            binding.followingCount.text = (user.followingCount?: 0).toString()
+            binding.postCount.text = (user.postCount?: 0).toString()
+            binding.followersCount.text = (user.followersCount?: 0).toString()
             if(!user.image.isNullOrEmpty()){
                 Picasso.get().load(user.image).into(binding.profileImage)
             }
         }
 
-        db.collection(Firebase.auth.currentUser!!.uid+POST).get().addOnSuccessListener {
-            val count = it.size()
-            binding.postCount.text = count.toString()
-        }
-
-        db.collection(Firebase.auth.currentUser!!.uid+FOLLOW).get().addOnSuccessListener {
-            val count = it.size()
-            binding.followingCount.text = count.toString()
-        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

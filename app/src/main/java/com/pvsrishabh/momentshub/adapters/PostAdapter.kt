@@ -9,13 +9,18 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.github.marlonlom.utilities.timeago.TimeAgo
 import com.google.firebase.Firebase
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
 import com.google.firebase.firestore.firestore
 import com.google.firebase.firestore.toObject
 import com.pvsrishabh.momentshub.R
 import com.pvsrishabh.momentshub.databinding.PostRvBinding
+import com.pvsrishabh.momentshub.models.Message
 import com.pvsrishabh.momentshub.models.Post
 import com.pvsrishabh.momentshub.models.User
+import com.pvsrishabh.momentshub.ui.OthersProfileActivity
+import com.pvsrishabh.momentshub.utils.CHAT
+import com.pvsrishabh.momentshub.utils.FOLLOW
 import com.pvsrishabh.momentshub.utils.LIKE
 import com.pvsrishabh.momentshub.utils.SAVE
 import com.pvsrishabh.momentshub.utils.USER_NODE
@@ -82,6 +87,14 @@ class PostAdapter(var context: Context, var postList: ArrayList<Post>) :
                 }
             }
 
+        val senderId = FirebaseAuth.getInstance().uid!!
+        val receiveId = postList[position].uid
+
+        val senderRoom = "$senderId$receiveId"
+        val receiverRoom = "$receiveId$senderId"
+
+        val cap = postList[position].caption
+
         holder.binding.like.setOnClickListener {
             if (like == 0) {
                 holder.binding.like.setImageResource(R.drawable.heart)
@@ -89,6 +102,27 @@ class PostAdapter(var context: Context, var postList: ArrayList<Post>) :
                     .document(postList[position].docId!!).set(postList[position])
                     .addOnSuccessListener {
                         like = 1
+                        // Push message to sender's and receiver's rooms in Firestore
+                        Firebase.firestore.collection(Firebase.auth.currentUser!!.uid + FOLLOW)
+                            .whereEqualTo("userId", receiveId).get().addOnSuccessListener {
+                                if (it.size() != 0) {
+                                    val model = Message(
+                                        senderId,
+                                        "Liked your Post about \"$cap\"",
+                                        System.currentTimeMillis().toString()
+                                    )
+                                    db.collection(CHAT)
+                                        .document(senderRoom)
+                                        .collection("messages")
+                                        .add(model)
+                                        .addOnSuccessListener {
+                                            db.collection(CHAT)
+                                                .document(receiverRoom)
+                                                .collection("messages")
+                                                .add(model)
+                                        }
+                                }
+                            }
                     }
                     .addOnFailureListener {
                         Toast.makeText(context, it.localizedMessage, Toast.LENGTH_SHORT).show()
@@ -97,8 +131,29 @@ class PostAdapter(var context: Context, var postList: ArrayList<Post>) :
                 holder.binding.like.setImageResource(R.drawable.like)
                 db.collection(Firebase.auth.currentUser!!.uid + LIKE)
                     .document(postList[position].docId!!).delete().addOnSuccessListener {
-                    like = 0
-                }
+                        like = 0
+
+                        Firebase.firestore.collection(Firebase.auth.currentUser!!.uid + FOLLOW)
+                            .whereEqualTo("userId", receiveId).get().addOnSuccessListener {
+                                if (it.size() != 0) {
+                                    val model = Message(
+                                        senderId,
+                                        "Disliked your Post about \"$cap\"",
+                                        System.currentTimeMillis().toString()
+                                    )
+                                    db.collection(CHAT)
+                                        .document(senderRoom)
+                                        .collection("messages")
+                                        .add(model)
+                                        .addOnSuccessListener {
+                                            db.collection(CHAT)
+                                                .document(receiverRoom)
+                                                .collection("messages")
+                                                .add(model)
+                                        }
+                                }
+                            }
+                    }
             }
         }
 
@@ -117,8 +172,8 @@ class PostAdapter(var context: Context, var postList: ArrayList<Post>) :
                 holder.binding.save.setImageResource(R.drawable.bookmark)
                 db.collection(Firebase.auth.currentUser!!.uid + SAVE)
                     .document(postList[position].docId!!).delete().addOnSuccessListener {
-                    save = 0
-                }
+                        save = 0
+                    }
             }
         }
 
@@ -128,6 +183,12 @@ class PostAdapter(var context: Context, var postList: ArrayList<Post>) :
             i.type = "text/plain"
             i.putExtra(Intent.EXTRA_TEXT, postList[position].postUrl)
             context.startActivity(i)
+        }
+
+        holder.binding.tvName.setOnClickListener {
+            val intent = Intent(context, OthersProfileActivity::class.java)
+            intent.putExtra("uid", postList[position].uid)
+            context.startActivity(intent)
         }
     }
 }
