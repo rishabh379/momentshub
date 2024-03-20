@@ -55,6 +55,12 @@ class SearchAdapter(var context: Context, var userList: ArrayList<User>) :
                 }
             }
 
+        holder.binding.name.setOnClickListener {
+            val intent = Intent(context, OthersProfileActivity::class.java)
+            intent.putExtra("uid", userList[position].userId)
+            context.startActivity(intent)
+        }
+
         holder.binding.follow.setOnClickListener {
             if (isFollow) {
                 Firebase.firestore.collection(Firebase.auth.currentUser!!.uid + FOLLOW)
