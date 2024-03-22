@@ -141,85 +141,87 @@ class OthersProfileActivity : AppCompatActivity() {
 
                     binding.btnFollow.setOnClickListener {
                         if (isFollow) {
-                            Firebase.firestore.collection(Firebase.auth.currentUser!!.uid + FOLLOW)
-                                .whereEqualTo("userId", uid).get().addOnSuccessListener {
-                                    if (!it.isEmpty) {
-                                        Firebase.firestore.collection(Firebase.auth.currentUser!!.uid + FOLLOW)
-                                            .document(it.documents[0].id).delete()
-                                            .addOnSuccessListener {
+                            val currentUser = Firebase.auth.currentUser
+                            val followCollection =
+                                Firebase.firestore.collection(currentUser!!.uid + FOLLOW)
 
-                                                Firebase.firestore.collection(uid + FOLLOWERS)
-                                                    .whereEqualTo("email", currUser!!.email).get()
-                                                    .addOnSuccessListener {docs->
+                            val followQueryTask = followCollection.whereEqualTo("userId", uid).get()
 
-                                                        Firebase.firestore.collection(uid + FOLLOWERS)
-                                                            .document(docs.documents[0].id).delete()
-                                                            .addOnFailureListener {
-                                                                Toast.makeText(
-                                                                    this@OthersProfileActivity,
-                                                                    "Failed",
-                                                                    Toast.LENGTH_SHORT
-                                                                ).show()
-                                                            }
-                                                    }.addOnFailureListener {
-                                                        Toast.makeText(
-                                                            this@OthersProfileActivity,
-                                                            "Failed",
-                                                            Toast.LENGTH_SHORT
-                                                        ).show()
-                                                    }
-                                            }.addOnFailureListener {
-                                                Toast.makeText(
-                                                    this@OthersProfileActivity,
-                                                    "Failed",
-                                                    Toast.LENGTH_SHORT
-                                                ).show()
+                            followQueryTask.addOnSuccessListener { querySnapshot ->
+                                if (!querySnapshot.isEmpty) {
+                                    val deleteFollowTask =
+                                        followCollection.document(querySnapshot.documents[0].id)
+                                            .delete()
+
+                                    deleteFollowTask.addOnSuccessListener {
+                                        val followerCollection =
+                                            Firebase.firestore.collection(uid + FOLLOWERS)
+                                        val followerQueryTask = followerCollection.whereEqualTo(
+                                            "email",
+                                            currentUser.email
+                                        ).get()
+
+                                        followerQueryTask.addOnSuccessListener { followerQuerySnapshot ->
+                                            if (!followerQuerySnapshot.isEmpty) {
+                                                val followerDocumentId =
+                                                    followerQuerySnapshot.documents[0].id
+                                                val deleteFollowerTask =
+                                                    followerCollection.document(followerDocumentId)
+                                                        .delete()
+
+                                                deleteFollowerTask.addOnFailureListener {
+                                                    showToast()
+                                                }
                                             }
+                                        }.addOnFailureListener {
+                                            showToast()
+                                        }
+                                    }.addOnFailureListener {
+                                        showToast()
                                     }
-                                    binding.btnFollow.text = "Follow"
-
-                                    val currentCountText = binding.followersCount.text.toString()
-                                    val currentCount = currentCountText.toIntOrNull() ?: 0
-                                    var newCount = currentCount - 1
-                                    if (newCount < 0) {
-                                        newCount = 0
-                                    }
-                                    binding.followersCount.text = newCount.toString()
-
-                                    changeFollowersCount(-1, uid)
-                                    changeFollowingCount(-1)
-                                    binding.btnMessage.visibility = View.GONE
-                                    binding.btnFollow.backgroundTintList =
-                                        ContextCompat.getColorStateList(this, R.color.white)
-                                    isFollow = false
-
-                                }.addOnFailureListener {
-                                    Toast.makeText(
-                                        this@OthersProfileActivity,
-                                        "Failed",
-                                        Toast.LENGTH_SHORT
-                                    ).show()
                                 }
+                            }.addOnFailureListener {
+                                showToast()
+                            }
+
+                            binding.btnFollow.text = "Follow"
+                            val currentCountText = binding.followersCount.text.toString()
+                            val currentCount = currentCountText.toIntOrNull() ?: 0
+                            var newCount = currentCount - 1
+                            if (newCount < 0) {
+                                newCount = 0
+                            }
+                            binding.followersCount.text = newCount.toString()
+
+                            changeFollowersCount(-1, uid)
+                            changeFollowingCount(-1)
+                            binding.btnMessage.visibility = View.GONE
+                            binding.btnFollow.backgroundTintList =
+                                ContextCompat.getColorStateList(this, R.color.white)
+                            isFollow = false
+
                         } else {
                             Firebase.firestore.collection(USER_NODE).document(uid).get()
-                                .addOnSuccessListener {
-                                    val user: User = it.toObject<User>()!!
-                                    Firebase.firestore.collection(Firebase.auth.currentUser!!.uid + FOLLOW)
-                                        .document()
-                                        .set(user).addOnSuccessListener {
-                                            binding.btnFollow.text = "Following"
+                                .addOnSuccessListener { userDocument ->
+                                    val user: User =
+                                        userDocument.toObject<User>() ?: return@addOnSuccessListener
 
+                                    val currentUserUid = Firebase.auth.currentUser!!.uid
+                                    val followCollection =
+                                        Firebase.firestore.collection(currentUserUid + FOLLOW)
+
+                                    val followTask = followCollection.document().set(user)
+
+                                    followTask.addOnSuccessListener {
+                                        binding.btnFollow.text = "Following"
+
+                                        val followerCollection =
                                             Firebase.firestore.collection(uid + FOLLOWERS)
-                                                .document().set(currUser!!).addOnFailureListener {
-                                                    Toast.makeText(
-                                                        this@OthersProfileActivity,
-                                                        "Failed",
-                                                        Toast.LENGTH_SHORT
-                                                    ).show()
-                                                }
+                                        val followerTask =
+                                            followerCollection.document().set(currUser!!)
 
+                                        followerTask.addOnSuccessListener {
                                             changeFollowersCount(1, uid)
-                                            changeFollowingCount(1)
 
                                             val currentCountText =
                                                 binding.followersCount.text.toString()
@@ -232,16 +234,19 @@ class OthersProfileActivity : AppCompatActivity() {
                                                 ContextCompat.getColorStateList(this, R.color.gray)
                                             isFollow = true
                                         }.addOnFailureListener {
-                                            Toast.makeText(
-                                                this@OthersProfileActivity,
-                                                "Failed",
-                                                Toast.LENGTH_SHORT
-                                            ).show()
+                                            showToast()
                                         }
+
+                                        changeFollowingCount(1)
+                                    }.addOnFailureListener {
+                                        showToast()
+                                    }
+                                }
+                                .addOnFailureListener {
+                                    showToast()
                                 }
                         }
                     }
-
                     binding.btnMessage.setOnClickListener {
                         val intent =
                             Intent(this@OthersProfileActivity, DetailedChatActivity::class.java)
@@ -253,5 +258,9 @@ class OthersProfileActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private fun showToast() {
+        Toast.makeText(this@OthersProfileActivity, "Failed", Toast.LENGTH_SHORT).show()
     }
 }

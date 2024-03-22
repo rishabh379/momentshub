@@ -4,6 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
+import com.bumptech.glide.RequestManager
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
 import com.google.firebase.firestore.firestore
@@ -40,9 +42,10 @@ class LikedPostsActivity : AppCompatActivity() {
             finish()
         }
 
+        val requestManager: RequestManager = Glide.with(this@LikedPostsActivity)
 
-        binding.rvLikedPost.layoutManager = LinearLayoutManager(this)
-        adapter = PostAdapter(this, postList)
+        binding.rvLikedPost.layoutManager = LinearLayoutManager(this@LikedPostsActivity)
+        adapter = PostAdapter(this@LikedPostsActivity, postList, requestManager)
         binding.rvLikedPost.adapter = adapter
 
         val currentUser: String = Firebase.auth.currentUser!!.uid

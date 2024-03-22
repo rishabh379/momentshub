@@ -2,6 +2,7 @@ package com.pvsrishabh.momentshub.fragments
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
@@ -9,15 +10,20 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.bumptech.glide.RequestManager
 import com.google.android.gms.tasks.Task
 import com.google.android.gms.tasks.Tasks
 import com.google.firebase.Firebase
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.auth
 import com.google.firebase.firestore.DocumentSnapshot
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.firestore
 import com.google.firebase.firestore.toObject
 import com.pvsrishabh.momentshub.Models.Story
@@ -30,6 +36,7 @@ import com.pvsrishabh.momentshub.models.User
 import com.pvsrishabh.momentshub.ui.ChatActivity
 import com.pvsrishabh.momentshub.ui.LikedPostsActivity
 import com.pvsrishabh.momentshub.ui.ReelsActivity
+import com.pvsrishabh.momentshub.ui.SignUpActivity
 import com.pvsrishabh.momentshub.ui.StoryActivity
 import com.pvsrishabh.momentshub.utils.FOLLOW
 import com.pvsrishabh.momentshub.utils.POST
@@ -38,15 +45,17 @@ import com.pvsrishabh.momentshub.utils.USER_NODE
 
 class HomeFragment : Fragment() {
 
-    lateinit var binding: FragmentHomeBinding
-
+    private lateinit var binding: FragmentHomeBinding
     private lateinit var postAdapter: PostAdapter
-
     private var postList = ArrayList<Post>()
-
     private var followList = ArrayList<User>()
-
     private lateinit var followAdapter: FollowAdapter
+    private lateinit var firebaseAuth: FirebaseAuth
+    private lateinit var firebaseFirestore: FirebaseFirestore
+    private var currentUser: FirebaseUser? = null
+    private lateinit var requestManager: RequestManager
+    private var doubleBackToExitPressedOnce = false
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -55,7 +64,20 @@ class HomeFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentHomeBinding.inflate(LayoutInflater.from(context), container, false)
 
-        postAdapter = PostAdapter(requireContext(), postList)
+        // Initialize Firebase components
+        firebaseAuth = FirebaseAuth.getInstance()
+        firebaseFirestore = FirebaseFirestore.getInstance()
+        currentUser = firebaseAuth.currentUser
+
+        if (currentUser == null) {
+            startActivity(Intent(requireContext(), SignUpActivity::class.java))
+            requireActivity().finish()
+            return binding.root
+        }
+
+        requestManager = Glide.with(requireContext())
+
+        postAdapter = PostAdapter(requireContext(), postList, requestManager)
         binding.rvPost.layoutManager = LinearLayoutManager(requireContext())
         binding.rvPost.adapter = postAdapter
 
@@ -142,7 +164,22 @@ class HomeFragment : Fragment() {
             postList.addAll(tempList)
             postAdapter.notifyDataSetChanged()
         }
+
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, onBackPressedCallback)
+
         return binding.root
+    }
+
+    private val onBackPressedCallback = object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            if (doubleBackToExitPressedOnce) {
+                activity?.finish()
+            } else {
+                doubleBackToExitPressedOnce = true
+                Toast.makeText(activity, "Press again to exit", Toast.LENGTH_SHORT).show()
+                Handler().postDelayed({ doubleBackToExitPressedOnce = false }, 2000)
+            }
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

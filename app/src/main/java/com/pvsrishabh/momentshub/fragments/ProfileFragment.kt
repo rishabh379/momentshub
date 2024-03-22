@@ -58,6 +58,7 @@ class ProfileFragment : Fragment() {
             intent.putExtra("uid",Firebase.auth.currentUser!!.uid)
             intent.putExtra("type", FOLLOWERS)
             activity?.startActivity(intent)
+            activity?.finish()
         }
 
         binding.followingLl.setOnClickListener {
@@ -65,6 +66,7 @@ class ProfileFragment : Fragment() {
             intent.putExtra("uid",Firebase.auth.currentUser!!.uid)
             intent.putExtra("type", FOLLOW)
             activity?.startActivity(intent)
+            activity?.finish()
         }
 
         auth = FirebaseAuth.getInstance()

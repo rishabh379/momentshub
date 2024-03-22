@@ -77,4 +77,11 @@ class EditProfileActivity : AppCompatActivity() {
             launcher.launch("image/*")
         }
     }
+
+    @Deprecated("Deprecated in Java")
+    override fun onBackPressed() {
+        // Perform any necessary actions on back press, such as closing resources or dialogs
+        super.onBackPressed()
+        startActivity(Intent(this@EditProfileActivity, HomeActivity::class.java))
+    }
 }
