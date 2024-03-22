@@ -6,6 +6,7 @@ class Post {
     var uid: String=""
     var docId: String? = ""
     var time: String=""
+    var likes: Long = 0
 
     constructor()
 

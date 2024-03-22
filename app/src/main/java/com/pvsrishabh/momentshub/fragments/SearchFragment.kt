@@ -10,10 +10,10 @@ import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
 import com.google.firebase.firestore.firestore
 import com.google.firebase.firestore.toObject
-import com.pvsrishabh.momentshub.models.User
-import com.pvsrishabh.momentshub.utils.USER_NODE
 import com.pvsrishabh.momentshub.adapters.SearchAdapter
 import com.pvsrishabh.momentshub.databinding.FragmentSearchBinding
+import com.pvsrishabh.momentshub.models.User
+import com.pvsrishabh.momentshub.utils.USER_NODE
 
 class SearchFragment : Fragment() {
 
@@ -32,39 +32,44 @@ class SearchFragment : Fragment() {
     ): View {
         binding = FragmentSearchBinding.inflate(inflater, container, false)
         binding.rv.layoutManager = LinearLayoutManager(requireContext())
-        adapter= SearchAdapter(requireContext(),userList)
+        adapter = SearchAdapter(requireContext(), userList)
         binding.rv.adapter = adapter
 
         val currentUser: String = Firebase.auth.currentUser!!.uid
         Firebase.firestore.collection(USER_NODE).get().addOnSuccessListener {
             val tempList = ArrayList<User>()
             userList.clear()
-            for(i in it.documents){
-                if(i.id != currentUser) {
-                    val user = i.toObject<User>()!!
-                    tempList.add(user)
+            if (!it.isEmpty) {
+                for (i in it.documents) {
+                    if (i.id != currentUser) {
+                        val user = i.toObject<User>()
+                        user?.let { tempList.add(it) } // Handle possible null value
+                    }
                 }
+                userList.addAll(tempList)
+                adapter.notifyDataSetChanged()
             }
-            userList.addAll(tempList)
-            adapter.notifyDataSetChanged()
         }
 
         binding.searchButton.setOnClickListener {
             val text = binding.userName.text.toString()
-            Firebase.firestore.collection(USER_NODE).whereEqualTo("name",text).get().addOnSuccessListener {
-                val tempList = ArrayList<User>()
-                userList.clear()
-                if(!it.isEmpty){
-                    for(i in it.documents){
-                        if(i.id != currentUser) {
-                            val user = i.toObject<User>()!!
-                            tempList.add(user)
+            Firebase.firestore.collection(USER_NODE).whereEqualTo("name", text).get()
+                .addOnSuccessListener {
+                    val tempList = ArrayList<User>()
+                    if (!it.isEmpty) {
+                        userList.clear()
+                        if (!it.isEmpty) {
+                            for (i in it.documents) {
+                                if (i.id != currentUser) {
+                                    val user = i.toObject<User>()!!
+                                    tempList.add(user)
+                                }
+                            }
+                            userList.addAll(tempList)
+                            adapter.notifyDataSetChanged()
                         }
                     }
-                    userList.addAll(tempList)
-                    adapter.notifyDataSetChanged()
                 }
-            }
         }
         return binding.root
     }

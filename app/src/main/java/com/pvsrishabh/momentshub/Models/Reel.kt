@@ -4,6 +4,9 @@ class Reel {
     var videoUrl:String=""
     var caption:String=""
     var profileLink:String?=null
+    var uid: String? = ""
+    var docId: String? = ""
+    var likes: Long = 0
 
     constructor()
 

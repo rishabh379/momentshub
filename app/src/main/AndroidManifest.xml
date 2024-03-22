@@ -15,6 +15,12 @@
         android:theme="@style/Theme.MomentsHub"
         tools:targetApi="31">
         <activity
+            android:name=".ui.StoryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.FollowActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.OthersProfileActivity"
             android:exported="false" />
         <activity

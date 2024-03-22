@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
     tools:context=".ui.ReelsActivity">
 
     <com.google.android.material.appbar.MaterialToolbar
@@ -24,7 +23,6 @@
         android:layout_height="wrap_content"
         android:text="Select Reel"
         android:layout_marginTop="32dp"
-        android:textColor="@color/black"
         style="@style/Widget.Material3.Button.OutlinedButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -68,6 +66,7 @@
             android:src="@drawable/reel" />
 
         <TextView
+            android:id="@+id/shareAsReel"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginStart="20dp"

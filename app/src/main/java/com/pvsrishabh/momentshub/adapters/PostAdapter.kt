@@ -22,8 +22,10 @@ import com.pvsrishabh.momentshub.ui.OthersProfileActivity
 import com.pvsrishabh.momentshub.utils.CHAT
 import com.pvsrishabh.momentshub.utils.FOLLOW
 import com.pvsrishabh.momentshub.utils.LIKE
+import com.pvsrishabh.momentshub.utils.POST
 import com.pvsrishabh.momentshub.utils.SAVE
 import com.pvsrishabh.momentshub.utils.USER_NODE
+import com.pvsrishabh.momentshub.utils.extractAndTrimFirstString
 
 class PostAdapter(var context: Context, var postList: ArrayList<Post>) :
     RecyclerView.Adapter<PostAdapter.myHolder>() {
@@ -44,15 +46,24 @@ class PostAdapter(var context: Context, var postList: ArrayList<Post>) :
         val db = Firebase.firestore
 
         db.collection(USER_NODE).document(postList[position].uid).get()
-            .addOnSuccessListener {
-                val user = it.toObject<User>()
-                Glide.with(context).load(user!!.image).placeholder(R.drawable.user_icon)
-                    .into(holder.binding.profileImage)
-                holder.binding.tvName.text = user.name
+            .addOnSuccessListener { documentSnapshot ->
+                val user = documentSnapshot.toObject<User>()
+                user?.let {
+                    Glide.with(context)
+                        .load(user.image)
+                        .placeholder(R.drawable.user_icon)
+                        .into(holder.binding.profileImage)
+                    holder.binding.tvName.text = user.name
+                }
             }
-        Glide.with(context).load(postList[position].postUrl).placeholder(R.drawable.loading)
+
+        Glide.with(context)
+            .load(postList[position].postUrl)
+            .placeholder(R.drawable.loading)
             .into(holder.binding.postImage)
+
         holder.binding.postCaption.text = postList[position].caption
+        holder.binding.likesCount.text = "${postList[position].likes} likes"
 
         try {
             holder.binding.time.text = TimeAgo.using(postList[position].time.toLong())
@@ -98,6 +109,8 @@ class PostAdapter(var context: Context, var postList: ArrayList<Post>) :
         holder.binding.like.setOnClickListener {
             if (like == 0) {
                 holder.binding.like.setImageResource(R.drawable.heart)
+                val nlikesCount: Long = extractAndTrimFirstString(holder.binding.likesCount.text.toString()).toLong() + 1
+                holder.binding.likesCount.text = "${nlikesCount} likes"
                 db.collection(Firebase.auth.currentUser!!.uid + LIKE)
                     .document(postList[position].docId!!).set(postList[position])
                     .addOnSuccessListener {
@@ -123,12 +136,32 @@ class PostAdapter(var context: Context, var postList: ArrayList<Post>) :
                                         }
                                 }
                             }
+
+                        // increase likes count
+                        val postDocRef =
+                            Firebase.firestore.collection(POST).document(postList[position].docId!!)
+
+                        Firebase.firestore.runTransaction { transaction ->
+                            val snapshot = transaction.get(postDocRef)
+                            val likes = snapshot.getLong("likes") ?: 0
+                            transaction.update(postDocRef, "likes", likes + 1)
+                        }.addOnSuccessListener {
+                            // Update successful
+                        }.addOnFailureListener { e ->
+                            // Handle any errors
+                        }
                     }
                     .addOnFailureListener {
                         Toast.makeText(context, it.localizedMessage, Toast.LENGTH_SHORT).show()
                     }
             } else {
                 holder.binding.like.setImageResource(R.drawable.like)
+                var likesCount: Long = extractAndTrimFirstString(holder.binding.likesCount.text.toString()).toLong()
+                if(likesCount.toInt() <= 0){
+                    likesCount = 1
+                }
+                val nlikesCount = likesCount - 1
+                holder.binding.likesCount.text = "${nlikesCount} likes"
                 db.collection(Firebase.auth.currentUser!!.uid + LIKE)
                     .document(postList[position].docId!!).delete().addOnSuccessListener {
                         like = 0
@@ -153,6 +186,20 @@ class PostAdapter(var context: Context, var postList: ArrayList<Post>) :
                                         }
                                 }
                             }
+
+                        // decrease likes count
+                        val postDocRef =
+                            Firebase.firestore.collection(POST).document(postList[position].docId!!)
+
+                        Firebase.firestore.runTransaction { transaction ->
+                            val snapshot = transaction.get(postDocRef)
+                            val likes = snapshot.getLong("likes") ?: 1
+                            transaction.update(postDocRef, "likes", likes - 1)
+                        }.addOnSuccessListener {
+                            // Update successful
+                        }.addOnFailureListener { e ->
+                            // Handle any errors
+                        }
                     }
             }
         }
@@ -177,7 +224,6 @@ class PostAdapter(var context: Context, var postList: ArrayList<Post>) :
             }
         }
 
-
         holder.binding.share.setOnClickListener {
             val i = Intent(Intent.ACTION_SEND)
             i.type = "text/plain"
@@ -186,9 +232,13 @@ class PostAdapter(var context: Context, var postList: ArrayList<Post>) :
         }
 
         holder.binding.tvName.setOnClickListener {
-            val intent = Intent(context, OthersProfileActivity::class.java)
-            intent.putExtra("uid", postList[position].uid)
-            context.startActivity(intent)
+            if(postList[position].uid.isNotEmpty()){
+                if (postList[position].uid != Firebase.auth.currentUser!!.uid) {
+                    val intent = Intent(context, OthersProfileActivity::class.java)
+                    intent.putExtra("uid", postList[position].uid)
+                    context.startActivity(intent)
+                }
+            }
         }
     }
 }

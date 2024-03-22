@@ -22,9 +22,11 @@ import com.pvsrishabh.momentshub.adapters.ViewPagerAdapter
 import com.pvsrishabh.momentshub.databinding.FragmentProfileBinding
 import com.pvsrishabh.momentshub.models.User
 import com.pvsrishabh.momentshub.ui.EditProfileActivity
+import com.pvsrishabh.momentshub.ui.FollowActivity
 import com.pvsrishabh.momentshub.ui.LoginActivity
 import com.pvsrishabh.momentshub.ui.SavedPostsActivity
 import com.pvsrishabh.momentshub.utils.FOLLOW
+import com.pvsrishabh.momentshub.utils.FOLLOWERS
 import com.pvsrishabh.momentshub.utils.POST
 import com.pvsrishabh.momentshub.utils.USER_NODE
 import com.squareup.picasso.Picasso
@@ -35,11 +37,6 @@ class ProfileFragment : Fragment() {
     private lateinit var viewPagerAdapter: ViewPagerAdapter
     private lateinit var auth: FirebaseAuth
     private lateinit var tUser: User
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,15 +53,39 @@ class ProfileFragment : Fragment() {
             activity?.finish()
         }
 
+        binding.followersLl.setOnClickListener {
+            val intent = Intent(activity, FollowActivity::class.java)
+            intent.putExtra("uid",Firebase.auth.currentUser!!.uid)
+            intent.putExtra("type", FOLLOWERS)
+            activity?.startActivity(intent)
+        }
+
+        binding.followingLl.setOnClickListener {
+            val intent = Intent(activity, FollowActivity::class.java)
+            intent.putExtra("uid",Firebase.auth.currentUser!!.uid)
+            intent.putExtra("type", FOLLOW)
+            activity?.startActivity(intent)
+        }
+
         auth = FirebaseAuth.getInstance()
 
-        viewPagerAdapter = ViewPagerAdapter(requireActivity().supportFragmentManager)
-        viewPagerAdapter.addFragment(MyPostFragment(auth.uid!!),"My Post")
-        viewPagerAdapter.addFragment(MyReelsFragment(auth.uid!!),"My Reels")
+        viewPagerAdapter = ViewPagerAdapter(requireActivity().supportFragmentManager,  auth.uid!!)
+        viewPagerAdapter.addFragment(MyPostFragment(),"My Post")
+        viewPagerAdapter.addFragment(MyReelsFragment(),"My Reels")
         binding.viewPager.adapter = viewPagerAdapter
         binding.tabLayout.setupWithViewPager(binding.viewPager)
 
         return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        viewPagerAdapter = ViewPagerAdapter(requireActivity().supportFragmentManager,  auth.uid!!)
+        viewPagerAdapter.addFragment(MyPostFragment(),"My Post")
+        viewPagerAdapter.addFragment(MyReelsFragment(),"My Reels")
+        binding.viewPager.adapter = viewPagerAdapter
+        binding.tabLayout.setupWithViewPager(binding.viewPager)
     }
 
     companion object {

@@ -42,6 +42,7 @@ class ReelFragment : Fragment() {
             reelList.clear()
             for (i in it.documents) {
                 val reel: Reel = i.toObject<Reel>()!!
+                reel.docId = i.id
                 tempList.add(reel)
             }
             reelList.addAll(tempList)
