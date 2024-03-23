@@ -137,7 +137,7 @@ class HomeFragment : Fragment() {
                     }
                 }
             }.addOnFailureListener {
-                Toast.makeText(activity, "Failed", Toast.LENGTH_SHORT).show()
+                Toast.makeText(activity, "Failed to Load Stories", Toast.LENGTH_SHORT).show()
             }
 
         binding.addImage.setOnClickListener {

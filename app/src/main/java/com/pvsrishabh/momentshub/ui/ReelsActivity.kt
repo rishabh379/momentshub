@@ -92,6 +92,7 @@ class ReelsActivity : AppCompatActivity() {
                         val reel = Reel(videoUrl, binding.caption.editText?.text.toString())
                         reel.profileLink = user.image
                         reel.uid = currUserId
+                        reel.time = System.currentTimeMillis().toString()
                         Firebase.firestore.collection(REEL).document().set(reel).addOnSuccessListener {
                             Firebase.firestore.collection(currUserId + REEL).document().set(reel)
                                 .addOnSuccessListener {

@@ -3,10 +3,12 @@ package com.pvsrishabh.momentshub.models
 class Reel {
     var videoUrl:String=""
     var caption:String=""
+    var time: String=""
     var profileLink:String?=null
     var uid: String? = ""
     var docId: String? = ""
     var likes: Long = 0
+    var comments: Long? = 0
 
     constructor()
 
