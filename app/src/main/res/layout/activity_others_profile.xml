@@ -32,6 +32,7 @@
             android:layout_height="100dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
+            android:contentDescription="Profile Photo"
             android:src="@drawable/user"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -75,6 +76,7 @@
                 style="@style/Widget.Material3.Button.OutlinedButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:contentDescription="Follow"
                 android:layout_marginHorizontal="18dp"
                 android:backgroundTint="@color/white"
                 android:textColor="@color/black"
@@ -88,6 +90,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="18dp"
                 android:backgroundTint="@color/white"
+                android:contentDescription="Message"
                 android:textColor="@color/black"
                 android:text="Message"
                 android:layout_weight="1"/>
@@ -108,6 +111,7 @@
                 android:id="@+id/postLl"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:contentDescription="Post Counts"
                 android:gravity="center_horizontal"
                 android:padding="20dp"
                 android:orientation="vertical">
@@ -135,6 +139,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
+                android:contentDescription="Followers List"
                 android:padding="20dp"
                 android:orientation="vertical">
 
@@ -190,11 +195,13 @@
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
+        android:contentDescription="Posts and Reels Tab"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewPager"
+        android:contentDescription="List of items"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

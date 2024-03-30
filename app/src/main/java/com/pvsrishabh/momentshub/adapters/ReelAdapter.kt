@@ -114,35 +114,34 @@ class ReelAdapter(var context: Context, var reelList: ArrayList<Reel>) :
                     .show()
             }
 
+        var likesCount = reelList[position].likes
         holder.binding.like.setOnClickListener {
+            holder.binding.like.isEnabled = false
             if (like == 0) {
                 try {
                     holder.binding.like.setImageResource(R.drawable.heart)
+                    val nlikesCount = likesCount + 1
+                    holder.binding.likesCount.text = nlikesCount.toString()
                     db.collection(currUserId + REELLIKE)
                         .document(reelList[position].docId!!).set(reelList[position])
                         .addOnSuccessListener {
+                            likesCount = nlikesCount
                             // increase likes count
-                            val reelDocRef =
-                                Firebase.firestore.collection(REEL)
-                                    .document(reelList[position].docId!!)
-
-                            Firebase.firestore.runTransaction { transaction ->
-                                val snapshot = transaction.get(reelDocRef)
-                                val likes = snapshot.getLong("likes") ?: 0
-                                transaction.update(reelDocRef, "likes", likes + 1)
-                            }.addOnSuccessListener {
-                                // Update successful
-                                like = 1
-                                val nlikesCount: Long =
-                                    holder.binding.likesCount.text.toString().toLong() + 1
-                                holder.binding.likesCount.text = "${nlikesCount}"
-                            }.addOnFailureListener {
-                                Toast.makeText(context, "An Error occured", Toast.LENGTH_SHORT)
-                                    .show()
-                            }
+                            Firebase.firestore.collection(REEL)
+                                .document(reelList[position].docId!!).update("likes", likesCount)
+                                .addOnSuccessListener {
+                                    // Update successful
+                                    like = 1
+                                    Toast.makeText(context, "Liked", Toast.LENGTH_SHORT).show()
+                                    holder.binding.like.isEnabled = true
+                                }.addOnFailureListener {
+                                    Toast.makeText(context, "An Error occured", Toast.LENGTH_SHORT)
+                                        .show()
+                                }
                         }
                         .addOnFailureListener {
-                            Toast.makeText(context, it.localizedMessage, Toast.LENGTH_SHORT).show()
+                            Toast.makeText(context, it.localizedMessage, Toast.LENGTH_SHORT)
+                                .show()
                         }
                 } catch (e: Exception) {
                     Toast.makeText(context, "An Error occured", Toast.LENGTH_SHORT)
@@ -152,32 +151,26 @@ class ReelAdapter(var context: Context, var reelList: ArrayList<Reel>) :
             } else {
                 try {
                     holder.binding.like.setImageResource(R.drawable.like)
+                    var nlikesCount = likesCount - 1
+                    nlikesCount = if (nlikesCount < 0) {
+                        0
+                    } else {
+                        nlikesCount
+                    }
+                    holder.binding.likesCount.text = nlikesCount.toString()
                     db.collection(currUserId + LIKE)
                         .document(reelList[position].docId!!).delete().addOnSuccessListener {
+                            likesCount = nlikesCount
                             // decrease likes count
-                            val reelDocRef =
-                                Firebase.firestore.collection(REEL)
-                                    .document(reelList[position].docId!!)
-
-                            Firebase.firestore.runTransaction { transaction ->
-                                val snapshot = transaction.get(reelDocRef)
-                                var likesC = snapshot.getLong("likes") ?: 1
-                                if (likesC < 1) {
-                                    likesC = 1
+                            Firebase.firestore.collection(REEL)
+                                .document(reelList[position].docId!!).update("likes", likesCount)
+                                .addOnSuccessListener {
+                                    like = 0
+                                    holder.binding.like.isEnabled = true
+                                }.addOnFailureListener { e ->
+                                    Toast.makeText(context, "An Error occured", Toast.LENGTH_SHORT)
+                                        .show()
                                 }
-                                transaction.update(reelDocRef, "likes", likesC - 1)
-                            }.addOnSuccessListener {
-                                like = 0
-                                var likesCount: Long =
-                                    holder.binding.likesCount.text.toString().toLong()
-                                if (likesCount.toInt() <= 0) {
-                                    likesCount = 1
-                                }
-                                val nlikesCount = likesCount - 1
-                                holder.binding.likesCount.text = "${nlikesCount}"
-                            }.addOnFailureListener { e ->
-                                // Handle any errors
-                            }
                         }.addOnFailureListener {
                             Toast.makeText(context, "An Error occured", Toast.LENGTH_SHORT)
                                 .show()
@@ -185,16 +178,17 @@ class ReelAdapter(var context: Context, var reelList: ArrayList<Reel>) :
                 } catch (e: Exception) {
                     Toast.makeText(context, "An Error occured", Toast.LENGTH_SHORT)
                         .show()
-
                 }
             }
         }
+
         holder.binding.comment.setOnClickListener {
             try {
                 requestManagerForReel = Glide.with(context)
                 val path = reelList[position].docId + REEL + COMMENT
                 val query =
-                    Firebase.firestore.collection(path).orderBy("time", Query.Direction.DESCENDING)
+                    Firebase.firestore.collection(path)
+                        .orderBy("time", Query.Direction.DESCENDING)
 
                 val registration = query.addSnapshotListener { value, error ->
                     if (error != null) {
@@ -263,22 +257,24 @@ class ReelAdapter(var context: Context, var reelList: ArrayList<Reel>) :
                         Toast.makeText(context, "Comment Added", Toast.LENGTH_SHORT).show()
                         Firebase.firestore.collection(REEL).document(reelList[position].docId!!)
                             .update("comments", FieldValue.increment(1)).addOnFailureListener {
-                            Toast.makeText(
-                                context,
-                                "Comments count update failed",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        }
+                                Toast.makeText(
+                                    context,
+                                    "Comments count update failed",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
                     }.addOnFailureListener {
-                    Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show()
-                }
+                        Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show()
+                    }
             }
             dialog.setOnDismissListener {
                 try {
-                    Firebase.firestore.collection(REEL).document(reelList[position].docId!!).get()
+                    Firebase.firestore.collection(REEL).document(reelList[position].docId!!)
+                        .get()
                         .addOnSuccessListener {
                             val tempReel = it.toObject<Reel>()!!
-                            holder.binding.commentsCount.text = (tempReel.comments ?: 0).toString()
+                            holder.binding.commentsCount.text =
+                                (tempReel.comments ?: 0).toString()
                         }
                 } catch (e: Exception) {
                     Toast.makeText(context, "Error Occured", Toast.LENGTH_SHORT).show()

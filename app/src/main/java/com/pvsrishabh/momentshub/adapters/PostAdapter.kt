@@ -124,27 +124,29 @@ class PostAdapter(
                     Toast.makeText(context, "Failed to Load Post's Save", Toast.LENGTH_SHORT).show()
                 }
 
+            var likesCount: Long =
+                extractAndTrimFirstString(holder.binding.likesCount.text.toString()).toLong()
             holder.binding.like.setOnClickListener {
+                holder.binding.like.isEnabled = false
                 if (like == 0) {
                     try {
                         holder.binding.like.setImageResource(R.drawable.heart)
-
+                        val nlikesCount = likesCount + 1
+                        holder.binding.likesCount.text = "${nlikesCount} likes"
                         db.collection(Firebase.auth.currentUser!!.uid + LIKE)
                             .document(postList[position].docId!!).set(postList[position])
                             .addOnSuccessListener {
                                 // increase likes count
+                                likesCount += 1
                                 val postDocRef =
                                     Firebase.firestore.collection(POST)
                                         .document(postList[position].docId!!)
-                                postDocRef.update("likes", FieldValue.increment(1))
+                                postDocRef.update("likes", likesCount)
                                     .addOnSuccessListener {
                                         Log.d(TAG, "Likes count updated successfully!")
                                         like = 1
                                         Toast.makeText(context, "Liked", Toast.LENGTH_SHORT).show()
-
-                                        val nlikesCount: Long =
-                                            extractAndTrimFirstString(holder.binding.likesCount.text.toString()).toLong() + 1
-                                        holder.binding.likesCount.text = "${nlikesCount} likes"
+                                        holder.binding.like.isEnabled = true
                                     }
                                     .addOnFailureListener { e ->
                                         Log.e(TAG, "Error updating likes count", e)
@@ -159,67 +161,52 @@ class PostAdapter(
                     } catch (e: Exception) {
                         Toast.makeText(context, "An Error occured", Toast.LENGTH_SHORT)
                             .show()
-
                     }
-
                 } else {
                     try {
                         holder.binding.like.setImageResource(R.drawable.like)
+                        var nlikesCount = likesCount - 1
+                        nlikesCount = if (nlikesCount < 0) {
+                            0
+                        } else {
+                            nlikesCount
+                        }
+                        holder.binding.likesCount.text =
+                            "$nlikesCount likes"
                         db.collection(Firebase.auth.currentUser!!.uid + LIKE)
                             .document(postList[position].docId!!).delete().addOnSuccessListener {
+                                likesCount -= 1
                                 // decrease likes count
-                                val postDocRef =
-                                    Firebase.firestore.collection(POST)
-                                        .document(postList[position].docId!!)
-
-                                postDocRef.get().addOnSuccessListener { documentSnapshot ->
-                                    val likes = documentSnapshot.getLong("likes") ?: 0
-                                    if (likes > 0) {
-                                        postDocRef.update("likes", FieldValue.increment(-1))
-                                            .addOnSuccessListener {
-                                                Log.d(TAG, "Likes count decremented successfully!")
-                                                like = 0
-
-                                                var likesCount: Long =
-                                                    extractAndTrimFirstString(holder.binding.likesCount.text.toString()).toLong()
-                                                if (likesCount.toInt() <= 0) {
-                                                    likesCount = 1
-                                                }
-                                                val nlikesCount = likesCount - 1
-                                                holder.binding.likesCount.text =
-                                                    "$nlikesCount likes"
-                                            }
-                                            .addOnFailureListener { e ->
-                                                Log.e(TAG, "Error decrementing likes count", e)
-                                            }
-                                    } else {
-                                        Log.d(
-                                            TAG,
-                                            "Likes count is already 0, no need to decrement further."
-                                        )
+                                Firebase.firestore.collection(POST)
+                                    .document(postList[position].docId!!)
+                                    .update("likes", likesCount)
+                                    .addOnSuccessListener {
+                                        Log.d(TAG, "Likes count decremented successfully!")
+                                        like = 0
+                                        holder.binding.like.isEnabled = true
                                     }
-                                }.addOnFailureListener { e ->
-                                    Log.e(TAG, "Error getting document", e)
-                                }
+                                    .addOnFailureListener { e ->
+                                        Log.e(TAG, "Error decrementing likes count", e)
+                                    }
                             }
                     } catch (e: Exception) {
                         Toast.makeText(context, "An Error occured", Toast.LENGTH_SHORT)
                             .show()
-
                     }
                 }
             }
 
             holder.binding.save.setOnClickListener {
+                holder.binding.save.isEnabled = false
                 if (save == 0) {
                     try {
+                        holder.binding.save.setImageResource(R.drawable.filled_bookmark)
                         db.collection(Firebase.auth.currentUser!!.uid + SAVE)
                             .document(postList[position].docId!!).set(postList[position])
                             .addOnSuccessListener {
                                 save = 1
-                                holder.binding.save.setImageResource(R.drawable.filled_bookmark)
-
                                 Toast.makeText(context, "Saved", Toast.LENGTH_SHORT).show()
+                                holder.binding.save.isEnabled = true
                             }
                             .addOnFailureListener {
                                 Toast.makeText(context, it.localizedMessage, Toast.LENGTH_SHORT)
@@ -228,15 +215,15 @@ class PostAdapter(
                     } catch (e: Exception) {
                         Toast.makeText(context, "An Error occured", Toast.LENGTH_SHORT)
                             .show()
-
                     }
                 } else {
                     try {
+                        holder.binding.save.setImageResource(R.drawable.bookmark)
                         db.collection(Firebase.auth.currentUser!!.uid + SAVE)
                             .document(postList[position].docId!!).delete().addOnSuccessListener {
                                 save = 0
-                                holder.binding.save.setImageResource(R.drawable.bookmark)
                                 Toast.makeText(context, "Unsaved", Toast.LENGTH_SHORT).show()
+                                holder.binding.save.isEnabled = true
                             }
                     } catch (e: Exception) {
                         Toast.makeText(context, "An Error occured", Toast.LENGTH_SHORT)
@@ -252,7 +239,7 @@ class PostAdapter(
                 context.startActivity(i)
             }
 
-            holder.binding.tvName.setOnClickListener {
+            holder.binding.navigateProfile.setOnClickListener {
                 if (postList[position].uid.isNotEmpty()) {
                     if (postList[position].uid != Firebase.auth.currentUser!!.uid) {
                         val intent = Intent(context, OthersProfileActivity::class.java)

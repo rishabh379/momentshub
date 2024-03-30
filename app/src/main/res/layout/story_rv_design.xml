@@ -8,8 +8,9 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/profile_image"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
+        android:layout_width="58dp"
+        android:layout_height="58dp"
+        android:contentDescription="Navigate to Watch the Story"
         android:layout_marginTop="1dp"
         android:layout_gravity="center_horizontal"
         android:src="@drawable/user_icon" />

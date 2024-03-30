@@ -12,7 +12,6 @@ import com.pvsrishabh.momentshub.databinding.ActivityFollowBinding
 import com.pvsrishabh.momentshub.models.User
 
 class FollowActivity : AppCompatActivity(), SearchAdapter.ErrorHandlingListener {
-    // Other activity code...
 
     override fun handleErrorAndNavigate() {
         // Handle error and navigate to HomeActivity
@@ -98,12 +97,5 @@ class FollowActivity : AppCompatActivity(), SearchAdapter.ErrorHandlingListener 
             }.addOnFailureListener {
                 Toast.makeText(this@FollowActivity, "No users found", Toast.LENGTH_SHORT).show()
             }
-    }
-
-    @Deprecated("Deprecated in Java")
-    override fun onBackPressed() {
-        // Perform any necessary actions on back press, such as closing resources or dialogs
-        super.onBackPressed()
-        startActivity(Intent(this@FollowActivity, HomeActivity::class.java))
     }
 }

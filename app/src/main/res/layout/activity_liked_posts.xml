@@ -21,6 +21,7 @@
         android:id="@+id/rv_liked_post"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:contentDescription="Liked Posts"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

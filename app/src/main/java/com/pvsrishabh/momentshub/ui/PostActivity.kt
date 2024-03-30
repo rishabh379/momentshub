@@ -3,6 +3,7 @@ package com.pvsrishabh.momentshub.ui
 import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.Firebase
@@ -59,6 +60,7 @@ class PostActivity : AppCompatActivity() {
         binding.postBtn.isEnabled = false
 
         binding.postBtn.setOnClickListener {
+            binding.postBtn.isEnabled = false
             Firebase.firestore.collection(USER_NODE).document(Firebase.auth.currentUser!!.uid).get()
                 .addOnSuccessListener {
                     val user = it.toObject<User>()
@@ -81,8 +83,14 @@ class PostActivity : AppCompatActivity() {
                                     Intent(this@PostActivity, HomeActivity::class.java)
                                 )
                                 finish()
+                            }.addOnFailureListener {
+                                Toast.makeText(this@PostActivity, "Cannot Upload this Post", Toast.LENGTH_SHORT).show()
                             }
+                    }.addOnFailureListener {
+                        Toast.makeText(this@PostActivity, "Cannot Upload this Post", Toast.LENGTH_SHORT).show()
                     }
+                }.addOnFailureListener {
+                    Toast.makeText(this@PostActivity, "Cannot Upload this Post", Toast.LENGTH_SHORT).show()
                 }
         }
 

@@ -39,5 +39,25 @@ class User{
         this.userId = userId
     }
 
+    constructor(
+        image: String?,
+        name: String?,
+        email: String?,
+        userId: String?,
+        bio: String?,
+        postCount: Long?,
+        followingCount: Long?,
+        followersCount: Long?
+    ) {
+        this.image = image
+        this.name = name
+        this.email = email
+        this.userId = userId
+        this.bio = bio
+        this.postCount = postCount
+        this.followingCount = followingCount
+        this.followersCount = followersCount
+    }
+
 
 }

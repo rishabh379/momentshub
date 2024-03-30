@@ -6,8 +6,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.google.firebase.Firebase
-import com.google.firebase.auth.auth
 import com.pvsrishabh.momentshub.R
 import com.pvsrishabh.momentshub.databinding.StoryRvDesignBinding
 import com.pvsrishabh.momentshub.models.User

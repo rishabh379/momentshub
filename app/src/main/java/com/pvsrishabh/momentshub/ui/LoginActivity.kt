@@ -16,8 +16,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.auth
 import com.google.firebase.firestore.firestore
-import com.pvsrishabh.momentshub.models.User
 import com.pvsrishabh.momentshub.databinding.ActivityLoginBinding
+import com.pvsrishabh.momentshub.models.User
 import com.pvsrishabh.momentshub.utils.USER_NODE
 
 class LoginActivity : AppCompatActivity() {
@@ -41,26 +41,36 @@ class LoginActivity : AppCompatActivity() {
                     auth.signInWithCredential(credential).addOnCompleteListener {
                         if (it.isSuccessful) {
                             val currUser = auth.currentUser
-                            val users = User().apply {
-                                userId = currUser?.uid
-                                name = currUser?.displayName
-                                email = currUser?.email
-                                bio = currUser?.email
-                                image = currUser?.photoUrl?.toString()
-                            }
-                            Firebase.firestore.collection(USER_NODE).document(currUser!!.uid)
-                                .set(users)
-                                .addOnSuccessListener {
-                                    progressDialogForLogin.dismiss()
-                                    startActivity(
-                                        Intent(
-                                            this@LoginActivity,
-                                            HomeActivity::class.java
-                                        )
-                                    )
+                            if (it.result?.additionalUserInfo?.isNewUser == true) {
+                                val users = User().apply {
+                                    userId = currUser?.uid
+                                    name = currUser?.displayName
+                                    email = currUser?.email
+                                    bio = currUser?.email
+                                    image = currUser?.photoUrl?.toString()
                                 }
+                                Firebase.firestore.collection(USER_NODE).document(currUser!!.uid)
+                                    .set(users)
+                                    .addOnSuccessListener {
+                                        progressDialogForLogin.dismiss()
+                                        startActivity(
+                                            Intent(
+                                                this@LoginActivity,
+                                                HomeActivity::class.java
+                                            )
+                                        )
+                                    }
+                            } else {
+                                progressDialogForLogin.dismiss()
+                                startActivity(Intent(this@LoginActivity, HomeActivity::class.java))
+                                finish()
+                            }
                         } else {
-                            Toast.makeText(this@LoginActivity, "Failed", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(
+                                this@LoginActivity,
+                                it.exception?.localizedMessage,
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
                     }
                 }

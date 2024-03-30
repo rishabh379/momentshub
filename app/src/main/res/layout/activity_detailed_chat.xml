@@ -22,6 +22,7 @@
         android:id="@+id/chatRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:contentDescription="Chats"
         app:layout_constraintBottom_toTopOf="@id/linear"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -59,9 +60,10 @@
 
                 <ImageButton
                     android:id="@+id/shareImg"
-                    android:layout_width="40dp"
-                    android:layout_height="50dp"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
                     android:backgroundTint="@color/white"
+                    android:contentDescription="Image Share"
                     android:src="@drawable/ic_share" />
 
                 <EditText
@@ -80,6 +82,7 @@
                 android:layout_height="35dp"
                 android:layout_gravity="end"
                 android:paddingStart="7dp"
+                android:contentDescription="Send Message"
                 android:src="@drawable/msg"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

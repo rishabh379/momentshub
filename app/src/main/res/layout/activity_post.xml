@@ -24,6 +24,7 @@
         android:layout_marginTop="17dp"
         android:scaleType="fitCenter"
         android:src="@drawable/post"
+        android:contentDescription="Upload Image"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/materialToolbar"
@@ -110,6 +111,7 @@
                     android:layout_margin="10dp"
                     android:layout_weight="1"
                     android:textColor="#858585"
+                    android:contentDescription="Cancel Uploading Post"
                     android:text="Cancel"
                     android:textSize="18sp"/>
 
@@ -121,6 +123,7 @@
                     android:layout_margin="10dp"
                     android:layout_weight="1"
                     android:backgroundTint="@color/blue"
+                    android:contentDescription="Start Uploading Post"
                     android:text="Post"
                     android:textSize="18sp" />
 

@@ -9,7 +9,14 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.pvsrishabh.momentshub.models.Reel
 import com.pvsrishabh.momentshub.databinding.MyReelRvDesignBinding
 
-class MyReelRvAdapter(var context: Context, var reelList: ArrayList<Reel>) : RecyclerView.Adapter<MyReelRvAdapter.ViewHolder>(){
+
+class MyReelRvAdapter(var context: Context, var reelList: ArrayList<Reel>, private val callback: MyReelRvAdapter.AdapterCallback) : RecyclerView.Adapter<MyReelRvAdapter.ViewHolder>(){
+
+
+    interface AdapterCallback {
+        fun onItemLongClicked(position: Int, reel: Reel)
+    }
+
 
     inner class ViewHolder(var binding: MyReelRvDesignBinding): RecyclerView.ViewHolder(binding.root){
 
@@ -30,5 +37,9 @@ class MyReelRvAdapter(var context: Context, var reelList: ArrayList<Reel>) : Rec
             .diskCacheStrategy(DiskCacheStrategy.ALL)
             .into(holder.binding.reelImage)
 
+        holder.itemView.setOnLongClickListener {
+            callback.onItemLongClicked(position, reelList[position])
+            false
+        }
     }
 }

@@ -16,4 +16,10 @@
 
     </style>
 
+    <style name="SplashScreenApi" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenAnimatedIcon">@drawable/instagram</item>
+        <item name="windowSplashScreenAnimationDuration">1000</item>
+        <item name="postSplashScreenTheme">@style/Theme.MomentsHub</item>
+    </style>
+
 </resources>

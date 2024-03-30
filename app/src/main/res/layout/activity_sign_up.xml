@@ -12,7 +12,8 @@
         android:id="@+id/profile_image"
         android:layout_width="140dp"
         android:layout_height="150dp"
-        android:layout_marginTop="90dp"
+        android:layout_marginTop="80dp"
+        android:contentDescription="Your Profile Photo"
         android:src="@drawable/user"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -20,9 +21,10 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/addImage"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:src="@drawable/plus"
+        android:contentDescription="Upload Profile Pic"
         app:civ_border_color="@color/white"
         app:civ_border_width="1dp"
         app:layout_constraintBottom_toBottomOf="@+id/profile_image"
@@ -90,9 +92,10 @@
         style="@style/Widget.Material3.Button.Icon"
         android:layout_width="0dp"
         android:layout_height="55dp"
-        android:layout_marginTop="18dp"
+        android:layout_marginTop="22dp"
         android:backgroundTint="@color/blue"
         android:text="Register"
+        android:contentDescription="Register"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/password"
         app:layout_constraintStart_toStartOf="@+id/password"
@@ -108,6 +111,7 @@
         android:textColor="@color/black"
         android:drawableLeft="@drawable/glogo"
         android:text="Continue with Google"
+        android:contentDescription="Register with Google"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/sign_up_btn"
         app:layout_constraintStart_toStartOf="@+id/sign_up_btn"
@@ -116,14 +120,16 @@
     <TextView
         android:id="@+id/login"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
+        android:textSize="18sp"
+        android:contentDescription="Navigate to login page"
         android:text="Already have an account? Login"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sign_up_google_btn"
-        app:layout_constraintVertical_bias="0.50" />
+        app:layout_constraintVertical_bias="0.70" />
 
     <TextView
         android:id="@+id/textView3"

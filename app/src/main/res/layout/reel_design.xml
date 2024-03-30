@@ -14,7 +14,8 @@
             android:id="@+id/video_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_centerInParent="true" />
+            android:layout_centerInParent="true"
+            android:contentDescription="Reel" />
 
     </RelativeLayout>
 
@@ -22,6 +23,7 @@
         android:id="@+id/profile"
         android:layout_width="55dp"
         android:layout_height="55dp"
+        android:contentDescription="Navigate to user's Profile Profile"
         android:layout_marginStart="14dp"
         android:layout_marginBottom="16dp"
         android:src="@drawable/user_icon"
@@ -68,6 +70,7 @@
             android:id="@+id/like"
             android:layout_width="33dp"
             android:layout_height="33dp"
+            android:contentDescription="Like this Reel"
             android:layout_marginVertical="16dp"
             android:src="@drawable/like"
             app:layout_constraintEnd_toEndOf="parent"
@@ -91,6 +94,7 @@
             android:id="@+id/comment"
             android:layout_width="33dp"
             android:layout_height="33dp"
+            android:contentDescription="Add a Comment"
             android:layout_marginVertical="16dp"
             android:src="@drawable/comment"
             app:layout_constraintEnd_toEndOf="parent"
@@ -114,6 +118,7 @@
             android:id="@+id/share"
             android:layout_width="33dp"
             android:layout_height="33dp"
+            android:contentDescription="Share this Reel"
             android:layout_marginVertical="16dp"
             android:src="@drawable/msg"
             app:layout_constraintEnd_toEndOf="parent"

@@ -140,6 +140,7 @@ class OthersProfileActivity : AppCompatActivity() {
                     }
 
                     binding.btnFollow.setOnClickListener {
+                        binding.btnFollow.isEnabled = false
                         if (isFollow) {
                             val currentUser = Firebase.auth.currentUser
                             val followCollection =
@@ -199,6 +200,7 @@ class OthersProfileActivity : AppCompatActivity() {
                             binding.btnFollow.backgroundTintList =
                                 ContextCompat.getColorStateList(this, R.color.white)
                             isFollow = false
+                            binding.btnFollow.isEnabled = true
 
                         } else {
                             Firebase.firestore.collection(USER_NODE).document(uid).get()
@@ -233,6 +235,7 @@ class OthersProfileActivity : AppCompatActivity() {
                                             binding.btnFollow.backgroundTintList =
                                                 ContextCompat.getColorStateList(this, R.color.gray)
                                             isFollow = true
+                                            binding.btnFollow.isEnabled = true
                                         }.addOnFailureListener {
                                             showToast()
                                         }

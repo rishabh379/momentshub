@@ -56,28 +56,34 @@ class SignUpActivity : AppCompatActivity() {
                     auth.signInWithCredential(credential).addOnCompleteListener {
                         if (it.isSuccessful) {
                             val currUser = auth.currentUser
-                            val users = User().apply {
-                                userId = currUser?.uid
-                                name = currUser?.displayName
-                                email = currUser?.email
-                                bio = currUser?.email
-                                image = if (imageUrl == null) {
-                                    currUser?.photoUrl?.toString()
-                                } else {
-                                    imageUrl
+                            if(it.result?.additionalUserInfo?.isNewUser == true){
+                                val users = User().apply {
+                                    userId = currUser?.uid
+                                    name = currUser?.displayName
+                                    email = currUser?.email
+                                    bio = currUser?.email
+                                    image = if (imageUrl == null) {
+                                        currUser?.photoUrl?.toString()
+                                    } else {
+                                        imageUrl
+                                    }
                                 }
-                            }
-                            Firebase.firestore.collection(USER_NODE).document(currUser!!.uid)
-                                .set(users)
-                                .addOnSuccessListener {
-                                    progressDialogForLogin.dismiss()
-                                    startActivity(
-                                        Intent(
-                                            this@SignUpActivity,
-                                            HomeActivity::class.java
+                                Firebase.firestore.collection(USER_NODE).document(currUser!!.uid)
+                                    .set(users)
+                                    .addOnSuccessListener {
+                                        progressDialogForLogin.dismiss()
+                                        startActivity(
+                                            Intent(
+                                                this@SignUpActivity,
+                                                HomeActivity::class.java
+                                            )
                                         )
-                                    )
-                                }
+                                    }
+                            }else{
+                                progressDialogForLogin.dismiss()
+                                startActivity(Intent(this@SignUpActivity, HomeActivity::class.java))
+                                finish()
+                            }
                         } else {
                             Toast.makeText(this@SignUpActivity, "Failed", Toast.LENGTH_SHORT).show()
                         }

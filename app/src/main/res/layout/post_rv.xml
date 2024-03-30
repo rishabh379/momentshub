@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -18,9 +17,9 @@
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/navigate_profile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -32,6 +31,7 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
+                android:contentDescription="Profile Photo"
                 android:src="@drawable/user_icon"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -42,6 +42,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="14dp"
+                android:contentDescription="Navigate to User's Profile"
                 android:text="Name"
                 app:layout_constraintBottom_toTopOf="@+id/time"
                 app:layout_constraintStart_toEndOf="@+id/profile_image"
@@ -64,6 +65,7 @@
             android:id="@+id/postImage"
             android:layout_width="match_parent"
             android:layout_height="400dp"
+            android:contentDescription="Post Image"
             android:scaleType="fitCenter"
             android:src="@drawable/loading" />
 
@@ -71,18 +73,17 @@
             android:id="@+id/likesCount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingTop="3dp"
             android:layout_gravity="start"
             android:paddingHorizontal="10dp"
-            android:text="0 likes"
-            />
+            android:paddingTop="3dp"
+            android:text="0 likes" />
 
         <TextView
             android:id="@+id/post_caption"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="3dp"
             android:paddingHorizontal="10dp"
+            android:paddingTop="3dp"
             android:text="TextView" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -92,36 +93,40 @@
 
             <ImageView
                 android:id="@+id/like"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
                 android:layout_marginTop="8dp"
+                android:contentDescription="Like this Post"
                 android:src="@drawable/like"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:id="@+id/comment"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
                 android:layout_marginStart="8dp"
+                android:contentDescription="Add a Comment"
                 android:src="@drawable/comment"
                 app:layout_constraintStart_toEndOf="@+id/like"
                 app:layout_constraintTop_toTopOf="@+id/like" />
 
             <ImageView
                 android:id="@+id/share"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
                 android:layout_marginStart="8dp"
+                android:contentDescription="Share this Post"
                 android:src="@drawable/msg"
                 app:layout_constraintStart_toEndOf="@+id/comment"
                 app:layout_constraintTop_toTopOf="@+id/comment" />
 
             <ImageView
                 android:id="@+id/save"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
                 android:layout_marginTop="8dp"
+                android:contentDescription="Save this Post"
                 android:src="@drawable/bookmark"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -131,6 +136,6 @@
 
     </LinearLayout>
 
-    </LinearLayout>
+</LinearLayout>
 
 

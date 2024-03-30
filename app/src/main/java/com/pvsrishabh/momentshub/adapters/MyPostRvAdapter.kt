@@ -4,18 +4,24 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.pvsrishabh.momentshub.models.Post
 import com.pvsrishabh.momentshub.databinding.MyPostRvDesignBinding
+import com.pvsrishabh.momentshub.models.Post
 import com.squareup.picasso.Picasso
 
-class MyPostRvAdapter(var context: Context,var postList: ArrayList<Post>) : RecyclerView.Adapter<MyPostRvAdapter.ViewHolder>(){
+class MyPostRvAdapter(var context: Context, var postList: ArrayList<Post>, private val callback: AdapterCallback) :
+    RecyclerView.Adapter<MyPostRvAdapter.ViewHolder>() {
 
-    inner class ViewHolder(var binding: MyPostRvDesignBinding): RecyclerView.ViewHolder(binding.root){
+    interface AdapterCallback {
+        fun onItemLongClicked(position: Int, post: Post)
+    }
+
+    inner class ViewHolder(var binding: MyPostRvDesignBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = MyPostRvDesignBinding.inflate(LayoutInflater.from(context),parent,false)
+        val binding = MyPostRvDesignBinding.inflate(LayoutInflater.from(context), parent, false)
         return ViewHolder(binding)
     }
 
@@ -24,6 +30,12 @@ class MyPostRvAdapter(var context: Context,var postList: ArrayList<Post>) : Recy
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        Picasso.get().load(postList.get(position).postUrl).into(holder.binding.postImage)
+        val post = postList[position]
+        Picasso.get().load(post.postUrl).into(holder.binding.postImage)
+
+        holder.itemView.setOnLongClickListener {
+            callback.onItemLongClicked(position, post)
+            false
+        }
     }
 }

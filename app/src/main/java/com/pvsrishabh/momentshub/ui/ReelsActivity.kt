@@ -69,6 +69,7 @@ class ReelsActivity : AppCompatActivity() {
                     "Your Story may appear can be seen on the Stories fall under your followers"
                 binding.selectReel.text = "Select Story"
                 binding.postBtn.setOnClickListener {
+                    binding.postBtn.isEnabled = false
                     val story = Story(
                         videoUrl,
                         System.currentTimeMillis().toString(),
@@ -86,6 +87,7 @@ class ReelsActivity : AppCompatActivity() {
             }
         }else{
             binding.postBtn.setOnClickListener {
+                binding.postBtn.isEnabled = false
                 Firebase.firestore.collection(USER_NODE).document(currUserId)
                     .get().addOnSuccessListener {
                         val user = it.toObject<User>()!!

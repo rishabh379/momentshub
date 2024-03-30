@@ -4,26 +4,31 @@
     <item
         android:id="@+id/home"
         android:icon="@drawable/home"
+        android:contentDescription="Navigate to HomeScreen"
         android:title="Home" />
 
     <item
         android:id="@+id/search"
         android:icon="@drawable/search"
+        android:contentDescription="Navigate to Search the User"
         android:title="Search" />
 
     <item
         android:id="@+id/add"
         android:icon="@drawable/add"
+        android:contentDescription="Navigate to add a Post or a Reel"
         android:title="Add" />
 
     <item
         android:id="@+id/reel"
         android:icon="@drawable/reel"
+        android:contentDescription="Navigate to Watch Reels"
         android:title="Reel" />
 
     <item
         android:id="@+id/profile"
         android:icon="@drawable/user_icon"
+        android:contentDescription="Navigate to your Profile Page"
         android:title="Profile" />
 
 </menu>

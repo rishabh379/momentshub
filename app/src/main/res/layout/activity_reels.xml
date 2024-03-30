@@ -22,6 +22,7 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:text="Select Reel"
+        android:contentDescription="Upload Reel"
         android:layout_marginTop="32dp"
         style="@style/Widget.Material3.Button.OutlinedButton"
         app:layout_constraintEnd_toEndOf="parent"
@@ -107,6 +108,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:layout_weight="1"
+            android:contentDescription="Cancel Uploading"
             android:textColor="#858585"
             android:text="Cancel"
             android:textSize="18sp"/>
@@ -118,6 +120,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:layout_weight="1"
+            android:contentDescription="Start Uploading"
             android:backgroundTint="@color/blue"
             android:text="Post"
             android:textSize="18sp" />

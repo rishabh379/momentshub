@@ -96,6 +96,7 @@ class SearchAdapter(
 
             if (userList.isNotEmpty() && position in userList.indices && userList.size != 0) {
                 holder.binding.follow.setOnClickListener {
+                    holder.binding.follow.isEnabled = false
                     if (isFollow) {
                         try {
                             Firebase.firestore.collection(currUserId + FOLLOW)
@@ -151,6 +152,7 @@ class SearchAdapter(
                                     holder.binding.follow.backgroundTintList =
                                         ContextCompat.getColorStateList(context, R.color.blue)
                                     isFollow = false
+                                    holder.binding.follow.isEnabled = true
                                 }
                         } catch (e: Exception) {
                             // Handle the error appropriately
@@ -178,11 +180,13 @@ class SearchAdapter(
                                     holder.binding.follow.text = "Unfollow"
                                     holder.binding.follow.backgroundTintList =
                                         ContextCompat.getColorStateList(context, R.color.gray)
-                                    isFollow = true
 
                                     // Increase followers count of the user
                                     changeFollowersCount(1, userList[position].userId!!)
                                     changeFollowingCount(1)
+
+                                    isFollow = true
+                                    holder.binding.follow.isEnabled = true
                                 }
                                 .addOnFailureListener { exception ->
                                     // Handle failure

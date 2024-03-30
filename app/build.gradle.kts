@@ -16,8 +16,8 @@ android {
         applicationId = "com.pvsrishabh.momentshub"
         minSdk = 26
         targetSdk = 34
-        versionCode = 20
-        versionName = "2.9"
+        versionCode = 28
+        versionName = "3.7"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -64,5 +64,5 @@ dependencies {
     implementation("com.makeramen:roundedimageview:2.3.0")
     implementation ("com.github.bumptech.glide:glide:4.16.0")
     implementation("com.github.marlonlom:timeago:4.0.3")
+    implementation("androidx.core:core-splashscreen:1.0.1")
 }
-
