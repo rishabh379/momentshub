@@ -40,31 +40,110 @@ MomentsHub is an upgraded social media application designed to foster connection
 
 ## Screenshots
 
-![Screenshot 1](images/Screenshot_20240416_232513.jpg)
-![Screenshot 2](images/Screenshot_20240416_232516.jpg)
-![Screenshot 3](images/Screenshot_20240416_232519.jpg)
-![Screenshot 4](images/Screenshot_20240416_232604.jpg)
-![Screenshot 5](images/Screenshot_20240416_232609.jpg)
-![Screenshot 6](images/Screenshot_20240416_232737.jpg)
-![Screenshot 7](images/Screenshot_20240416_232746.jpg)
-![Screenshot 8](images/Screenshot_20240416_232819.jpg)
-![Screenshot 9](images/Screenshot_20240416_232839.jpg)
-![Screenshot 10](images/Screenshot_20240416_232848.jpg)
-![Screenshot 11](images/Screenshot_20240416_232854.jpg)
-![Screenshot 12](images/Screenshot_20240416_232947.jpg)
-![Screenshot 13](images/Screenshot_20240416_232953.jpg)
-![Screenshot 14](images/Screenshot_20240416_233000.jpg)
-![Screenshot 15](images/Screenshot_20240416_233008.jpg)
-![Screenshot 16](images/Screenshot_20240416_233105.jpg)
-![Screenshot 17](images/Screenshot_20240416_233301.jpg)
-![Screenshot 18](images/Screenshot_20240416_233306.jpg)
-![Screenshot 19](images/Screenshot_20240416_233538.jpg)
+<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
+
+<div>
+    <img src="images/Screenshot_20240416_232513.jpg" alt="Screenshot 1" style="width: 100%;">
+    <p style="text-align: center;">SplashScreen</p>
+</div>
+
+<div>
+    <img src="images/Screenshot_20240416_232516.jpg" alt="Screenshot 2" style="width: 100%;">
+    <p style="text-align: center;">SignUp Screen</p>
+</div>
+
+<div>
+    <img src="images/Screenshot_20240416_232519.jpg" alt="Screenshot 3" style="width: 100%;">
+    <p style="text-align: center;">Login Screen</p>
+</div>
+
+<div>
+    <img src="images/Screenshot_20240416_232604.jpg" alt="Screenshot 4" style="width: 100%;">
+    <p style="text-align: center;">Search Screen</p>
+</div>
+
+<div>
+    <img src="images/Screenshot_20240416_232609.jpg" alt="Screenshot 5" style="width: 100%;">
+    <p style="text-align: center;">Add Screen</p>
+</div>
+
+<div>
+    <img src="images/Screenshot_20240416_232737.jpg" alt="Screenshot 6" style="width: 100%;">
+    <p style="text-align: center;">Liked Screen</p>
+</div>
+
+<div>
+    <img src="images/Screenshot_20240416_232746.jpg" alt="Screenshot 7" style="width: 100%;">
+    <p style="text-align: center;">Message Screen</p>
+</div>
+
+<div>
+    <img src="images/Screenshot_20240416_232819.jpg" alt="Screenshot 8" style="width: 100%;">
+    <p style="text-align: center;">Chat Screen</p>
+</div>
+
+<div>
+    <img src="images/Screenshot_20240416_232839.jpg" alt="Screenshot 9" style="width: 100%;">
+    <p style="text-align: center;">Profile Screen</p>
+</div>
+
+<div>
+    <img src="images/Screenshot_20240416_232848.jpg" alt="Screenshot 10" style="width: 100%;">
+    <p style="text-align: center;">Menu Options</p>
+</div>
+
+<div>
+    <img src="images/Screenshot_20240416_232854.jpg" alt="Screenshot 11" style="width: 100%;">
+    <p style="text-align: center;">Feedback Screen</p>
+</div>
+
+<div>
+    <img src="images/Screenshot_20240416_232947.jpg" alt="Screenshot 12" style="width: 100%;">
+    <p style="text-align: center;">Post-Upload Screen</p>
+</div>
+
+<div>
+    <img src="images/Screenshot_20240416_232953.jpg" alt="Screenshot 13" style="width: 100%;">
+    <p style="text-align: center;">Reel-Upload Screen</p>
+</div>
+
+<div>
+    <img src="images/Screenshot_20240416_233000.jpg" alt="Screenshot 14" style="width: 100%;">
+    <p style="text-align: center;">Profile-Update Screen</p>
+</div>
+
+<div>
+    <img src="images/Screenshot_20240416_233008.jpg" alt="Screenshot 15" style="width: 100%;">
+    <p style="text-align: center;">Story-Upload Screen</p>
+</div>
+
+<div>
+    <img src="images/Screenshot_20240416_233105.jpg" alt="Screenshot 16" style="width: 100%;">
+    <p style="text-align: center;">Comment Dialog</p>
+</div>
+
+<div>
+    <img src="images/Screenshot_20240416_233301.jpg" alt="Screenshot 17" style="width: 100%;">
+    <p style="text-align: center;">Home Screen</p>
+</div>
+
+<div>
+    <img src="images/Screenshot_20240416_233306.jpg" alt="Screenshot 18" style="width: 100%;">
+    <p style="text-align: center;">Story Screen</p>
+</div>
+
+<div>
+    <img src="images/Screenshot_20240416_233538.jpg" alt="Screenshot 19" style="width: 100%;">
+    <p style="text-align: center;">Reel Screen</p>
+</div>
+
+</div>
 
 ## Get Started
 
 To start exploring MomentsHub and connecting with others through shared moments, download the app from the App Store or Google Play Store and create your account today! Join our vibrant community and embark on a journey of discovery, creativity, and connection.
 
-[Download MomentsHub](#) (Coming Soon)
+[Download MomentsHub](https://play.google.com/store/apps/details?id=com.pvsrishabh.momentshub)
 
 ## Feedback
 
