@@ -40,124 +40,104 @@ MomentsHub is an upgraded social media application designed to foster connection
 
 ## Screenshots
 
-<div class="screenshot-row">
+<div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: flex-start;">
 
-<div>
-    <img src="images/Screenshot_20240416_232513.jpg" alt="Screenshot 1" >
-    <p style="text-align: center;">SplashScreen</p>
+<div style="flex: 1 0 auto; max-width: calc(33.33% - 20px); text-align: center;">
+    <img src="images/Screenshot_20240416_232513.jpg" alt="Screenshot 1" style="width: 100%;">
+    <p>SplashScreen</p>
 </div>
 
-<div>
-    <img src="images/Screenshot_20240416_232516.jpg" alt="Screenshot 2" >
-    <p style="text-align: center;">SignUp Screen</p>
+<div style="flex: 1 0 auto; max-width: calc(33.33% - 20px); text-align: center;">
+    <img src="images/Screenshot_20240416_232516.jpg" alt="Screenshot 2" style="width: 100%;">
+    <p>SignUp Screen</p>
 </div>
 
-<div>
-    <img src="images/Screenshot_20240416_232519.jpg" alt="Screenshot 3" >
-    <p style="text-align: center;">Login Screen</p>
+<div style="flex: 1 0 auto; max-width: calc(33.33% - 20px); text-align: center;">
+    <img src="images/Screenshot_20240416_232519.jpg" alt="Screenshot 3" style="width: 100%;">
+    <p>Login Screen</p>
 </div>
 
-<div>
-    <img src="images/Screenshot_20240416_232604.jpg" alt="Screenshot 4" >
-    <p style="text-align: center;">Search Screen</p>
+<div style="flex: 1 0 auto; max-width: calc(33.33% - 20px); text-align: center;">
+    <img src="images/Screenshot_20240416_232604.jpg" alt="Screenshot 4" style="width: 100%;">
+    <p>Search Screen</p>
 </div>
 
-<div>
-    <img src="images/Screenshot_20240416_232609.jpg" alt="Screenshot 5" >
-    <p style="text-align: center;">Add Screen</p>
+<div style="flex: 1 0 auto; max-width: calc(33.33% - 20px); text-align: center;">
+    <img src="images/Screenshot_20240416_232609.jpg" alt="Screenshot 5" style="width: 100%;">
+    <p>Add Screen</p>
 </div>
 
-<div>
-    <img src="images/Screenshot_20240416_232737.jpg" alt="Screenshot 6" >
-    <p style="text-align: center;">Liked Screen</p>
+<div style="flex: 1 0 auto; max-width: calc(33.33% - 20px); text-align: center;">
+    <img src="images/Screenshot_20240416_232737.jpg" alt="Screenshot 6" style="width: 100%;">
+    <p>Liked Screen</p>
 </div>
 
-<div>
-    <img src="images/Screenshot_20240416_232746.jpg" alt="Screenshot 7" >
-    <p style="text-align: center;">Message Screen</p>
+<div style="flex: 1 0 auto; max-width: calc(33.33% - 20px); text-align: center;">
+    <img src="images/Screenshot_20240416_232746.jpg" alt="Screenshot 7" style="width: 100%;">
+    <p>Message Screen</p>
 </div>
 
-<div>
-    <img src="images/Screenshot_20240416_232819.jpg" alt="Screenshot 8" >
-    <p style="text-align: center;">Chat Screen</p>
+<div style="flex: 1 0 auto; max-width: calc(33.33% - 20px); text-align: center;">
+    <img src="images/Screenshot_20240416_232819.jpg" alt="Screenshot 8" style="width: 100%;">
+    <p>Chat Screen</p>
 </div>
 
-<div>
-    <img src="images/Screenshot_20240416_232839.jpg" alt="Screenshot 9" >
-    <p style="text-align: center;">Profile Screen</p>
+<div style="flex: 1 0 auto; max-width: calc(33.33% - 20px); text-align: center;">
+    <img src="images/Screenshot_20240416_232839.jpg" alt="Screenshot 9" style="width: 100%;">
+    <p>Profile Screen</p>
 </div>
 
-<div>
-    <img src="images/Screenshot_20240416_232848.jpg" alt="Screenshot 10" >
-    <p style="text-align: center;">Menu Options</p>
+<div style="flex: 1 0 auto; max-width: calc(33.33% - 20px); text-align: center;">
+    <img src="images/Screenshot_20240416_232848.jpg" alt="Screenshot 10" style="width: 100%;">
+    <p>Menu Options</p>
 </div>
 
-<div>
-    <img src="images/Screenshot_20240416_232854.jpg" alt="Screenshot 11" >
-    <p style="text-align: center;">Feedback Screen</p>
+<div style="flex: 1 0 auto; max-width: calc(33.33% - 20px); text-align: center;">
+    <img src="images/Screenshot_20240416_232854.jpg" alt="Screenshot 11" style="width: 100%;">
+    <p>Feedback Screen</p>
 </div>
 
-<div>
-    <img src="images/Screenshot_20240416_232947.jpg" alt="Screenshot 12" >
-    <p style="text-align: center;">Post-Upload Screen</p>
+<div style="flex: 1 0 auto; max-width: calc(33.33% - 20px); text-align: center;">
+    <img src="images/Screenshot_20240416_232947.jpg" alt="Screenshot 12" style="width: 100%;">
+    <p>Post-Upload Screen</p>
 </div>
 
-<div>
-    <img src="images/Screenshot_20240416_232953.jpg" alt="Screenshot 13" >
-    <p style="text-align: center;">Reel-Upload Screen</p>
+<div style="flex: 1 0 auto; max-width: calc(33.33% - 20px); text-align: center;">
+    <img src="images/Screenshot_20240416_232953.jpg" alt="Screenshot 13" style="width: 100%;">
+    <p>Reel-Upload Screen</p>
 </div>
 
-<div>
-    <img src="images/Screenshot_20240416_233000.jpg" alt="Screenshot 14" >
-    <p style="text-align: center;">Profile-Update Screen</p>
+<div style="flex: 1 0 auto; max-width: calc(33.33% - 20px); text-align: center;">
+    <img src="images/Screenshot_20240416_233000.jpg" alt="Screenshot 14" style="width: 100%;">
+    <p>Profile-Update Screen</p>
 </div>
 
-<div>
-    <img src="images/Screenshot_20240416_233008.jpg" alt="Screenshot 15" >
-    <p style="text-align: center;">Story-Upload Screen</p>
+<div style="flex: 1 0 auto; max-width: calc(33.33% - 20px); text-align: center;">
+    <img src="images/Screenshot_20240416_233008.jpg" alt="Screenshot 15" style="width: 100%;">
+    <p>Story-Upload Screen</p>
 </div>
 
-<div>
-    <img src="images/Screenshot_20240416_233105.jpg" alt="Screenshot 16" >
-    <p style="text-align: center;">Comment Dialog</p>
+<div style="flex: 1 0 auto; max-width: calc(33.33% - 20px); text-align: center;">
+    <img src="images/Screenshot_20240416_233105.jpg" alt="Screenshot 16" style="width: 100%;">
+    <p>Comment Dialog</p>
 </div>
 
-<div>
-    <img src="images/Screenshot_20240416_233301.jpg" alt="Screenshot 17" >
-    <p style="text-align: center;">Home Screen</p>
+<div style="flex: 1 0 auto; max-width: calc(33.33% - 20px); text-align: center;">
+    <img src="images/Screenshot_20240416_233301.jpg" alt="Screenshot 17" style="width: 100%;">
+    <p>Home Screen</p>
 </div>
 
-<div>
-    <img src="images/Screenshot_20240416_233306.jpg" alt="Screenshot 18" >
-    <p style="text-align: center;">Story Screen</p>
+<div style="flex: 1 0 auto; max-width: calc(33.33% - 20px); text-align: center;">
+    <img src="images/Screenshot_20240416_233306.jpg" alt="Screenshot 18" style="width: 100%;">
+    <p>Story Screen</p>
 </div>
 
-<div>
-    <img src="images/Screenshot_20240416_233538.jpg" alt="Screenshot 19" >
-    <p style="text-align: center;">Reel Screen</p>
+<div style="flex: 1 0 auto; max-width: calc(33.33% - 20px); text-align: center;">
+    <img src="images/Screenshot_20240416_233538.jpg" alt="Screenshot 19" style="width: 100%;">
+    <p>Reel Screen</p>
 </div>
 
 </div>
-
-<style>
-    .screenshot-row {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 20px;
-        justify-content: flex-start; /* Adjust alignment as needed */
-    }
-
-    .screenshot-row > div {
-        flex: 1 0 auto; /* Allow items to grow and shrink as needed */
-        max-width: calc(33.33% - 20px); /* Adjust the width based on the number of items per row and the gap */
-        text-align: center;
-    }
-
-    .screenshot-row img {
-        width: 100%; /* Make images fill the container */
-        height: auto; /* Maintain aspect ratio */
-    }
-</style>
 
 ## Get Started
 
