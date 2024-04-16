@@ -25,6 +25,7 @@
         android:minWidth="50dp"
         android:paddingRight="20dp"
         android:text="Hello world"
+        android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/receiverTime"
         app:layout_constraintStart_toStartOf="@+id/guideline"
@@ -54,6 +55,7 @@
         android:minWidth="50dp"
         android:text="7:10am"
         app:layout_constraintHorizontal_bias="1"
+        android:textColor="@color/black"
         app:layout_constraintStart_toEndOf="@id/guideline"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />

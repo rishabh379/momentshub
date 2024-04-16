@@ -3,7 +3,7 @@
 
     <item
         android:id="@+id/home"
-        android:icon="@drawable/home"
+        android:icon="@drawable/home_selected"
         android:contentDescription="Navigate to HomeScreen"
         android:title="Home" />
 

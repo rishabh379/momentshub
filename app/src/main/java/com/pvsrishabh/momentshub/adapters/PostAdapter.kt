@@ -20,7 +20,6 @@ import com.bumptech.glide.RequestManager
 import com.github.marlonlom.utilities.timeago.TimeAgo
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
-import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.firestore
 import com.google.firebase.firestore.toObject

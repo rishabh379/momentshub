@@ -8,6 +8,10 @@
         android:title="Saved" />
 
     <item
+        android:id="@+id/feedback"
+        android:title="Feedback" />
+
+    <item
         android:id="@+id/logOut"
         android:icon="@drawable/logout"
         android:title="Logout" />

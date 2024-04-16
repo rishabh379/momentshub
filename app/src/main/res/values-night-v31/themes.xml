@@ -20,6 +20,5 @@
         <item name="android:windowSplashScreenAnimatedIcon">@drawable/instagram</item>
         <item name="android:windowSplashScreenAnimationDuration">1000</item>
         <item name="postSplashScreenTheme">@style/Theme.MomentsHub</item>
-        <item name="android:windowSplashScreenBrandingImage">@drawable/img_brand</item>
     </style>
 </resources>

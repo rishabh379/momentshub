@@ -22,6 +22,7 @@ import com.pvsrishabh.momentshub.adapters.ViewPagerAdapter
 import com.pvsrishabh.momentshub.databinding.FragmentProfileBinding
 import com.pvsrishabh.momentshub.models.User
 import com.pvsrishabh.momentshub.ui.EditProfileActivity
+import com.pvsrishabh.momentshub.ui.FeedbackActivity
 import com.pvsrishabh.momentshub.ui.FollowActivity
 import com.pvsrishabh.momentshub.ui.LoginActivity
 import com.pvsrishabh.momentshub.ui.SavedPostsActivity
@@ -147,6 +148,10 @@ class ProfileFragment : Fragment() {
                 }
                 activity?.startActivity(Intent(requireContext(), LoginActivity::class.java))
                 activity?.finish()
+                true
+            }
+            R.id.feedback -> {
+                activity?.startActivity(Intent(requireContext(), FeedbackActivity::class.java))
                 true
             }
             else -> super.onOptionsItemSelected(item)

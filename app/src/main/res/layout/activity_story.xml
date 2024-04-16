@@ -88,7 +88,9 @@
                     android:id="@+id/etMessage"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:hint="   Send Message"
+                    android:hint="   Send Message..."
+                    android:textColor="@color/black"
+                    android:textColorHint="#2E2E2E"
                     android:inputType="textPersonName"
                     android:padding="10dp" />
 

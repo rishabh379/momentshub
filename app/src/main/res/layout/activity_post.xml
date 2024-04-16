@@ -47,6 +47,8 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/text_color"
+            android:textColorHint="@color/text_color"
             android:visibility="visible" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -110,7 +112,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:layout_weight="1"
-                    android:textColor="#858585"
+                    android:textColor="@color/text_color"
                     android:contentDescription="Cancel Uploading Post"
                     android:text="Cancel"
                     android:textSize="18sp"/>

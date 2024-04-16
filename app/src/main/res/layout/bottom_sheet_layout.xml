@@ -64,6 +64,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:hint="   Add a comment"
+                    android:textColor="@color/black"
+                    android:textColorHint="#333333"
                     android:inputType="textPersonName"
                     android:padding="10dp" />
 

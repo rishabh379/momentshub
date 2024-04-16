@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:paddingHorizontal="5dp"
     android:gravity="center_horizontal"
     android:orientation="vertical">
@@ -12,6 +13,7 @@
         android:layout_height="58dp"
         android:contentDescription="Navigate to Watch the Story"
         android:layout_marginTop="1dp"
+        app:civ_border_color="#CC4DCA"
         android:layout_gravity="center_horizontal"
         android:src="@drawable/user_icon" />
 

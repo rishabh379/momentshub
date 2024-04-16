@@ -56,7 +56,6 @@ class HomeFragment : Fragment() {
     private lateinit var requestManager: RequestManager
     private var doubleBackToExitPressedOnce = false
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -91,6 +90,8 @@ class HomeFragment : Fragment() {
 
         Firebase.firestore.collection(Firebase.auth.currentUser!!.uid + FOLLOW).get()
             .addOnSuccessListener { querySnapshot ->
+                val tempList1 = ArrayList<User>()
+                val tempList2 = ArrayList<User>()
                 val tempList = ArrayList<User>()
                 followList.clear()
 
@@ -98,35 +99,40 @@ class HomeFragment : Fragment() {
 
                 for (document in querySnapshot.documents) {
                     val user: User = document.toObject<User>()!!
-                    val task = Firebase.firestore.collection(STORY).document(user.userId + STORY).get()
-                        .addOnSuccessListener { tStory ->
-                            if (tStory.exists()) {
-                                val story = tStory.toObject<Story>()!!
-                                val time = System.currentTimeMillis() - story.time.toLong()
-                                if (time <= 86400000) {
-                                    tempList.add(user)
+                    val task =
+                        Firebase.firestore.collection(STORY).document(user.userId + STORY).get()
+                            .addOnSuccessListener { its ->
+                                if (its.exists()) {
+                                    val story = its.toObject<Story>()!!
+                                    val time = System.currentTimeMillis() - story.time.toLong()
+                                    if (time <= 86400000) {
+                                        tempList1.add(user)
+                                    } else {
+                                        tempList2.add(user)
+                                    }
+                                } else {
+                                    tempList2.add(user)
                                 }
                             }
-                        }
-                        .addOnFailureListener {
-                            // Handle errors
-                        }
+                            .addOnFailureListener {
+//                            tempList2.add(user)
+                            }
                     tasks.add(task)
                 }
 
                 Tasks.whenAllSuccess<DocumentSnapshot>(tasks)
                     .addOnSuccessListener {
+                        tempList.addAll(tempList1)
+                        tempList.addAll(tempList2)
                         followList.addAll(tempList)
                         followAdapter.notifyDataSetChanged()
                     }
             }
 
-
-
         Firebase.firestore.collection(STORY).document(Firebase.auth.currentUser!!.uid + STORY)
             .get().addOnSuccessListener {
                 if (it.exists()) {
-                    binding.profileImage.setOnClickListener {_ ->
+                    binding.profileImage.setOnClickListener { _ ->
                         val story = it.toObject<Story>()!!
                         val time = System.currentTimeMillis() - story.time.toLong()
                         if (time <= 86400000) {
@@ -149,8 +155,14 @@ class HomeFragment : Fragment() {
         Firebase.firestore.collection(USER_NODE).document(Firebase.auth.currentUser!!.uid).get()
             .addOnSuccessListener {
                 val user = it.toObject<User>()
-                Glide.with(requireContext()).load(user!!.image).placeholder(R.drawable.user_icon)
-                    .into(binding.profileImage)
+                try {
+                    Glide.with(requireContext()).load(user!!.image)
+                        .placeholder(R.drawable.user_icon)
+                        .into(binding.profileImage)
+                } catch (e: Exception) {
+                    Toast.makeText(activity, "Error loading Profile image", Toast.LENGTH_SHORT)
+                        .show()
+                }
             }
 
         Firebase.firestore.collection(POST).get().addOnSuccessListener {
@@ -165,7 +177,10 @@ class HomeFragment : Fragment() {
             postAdapter.notifyDataSetChanged()
         }
 
-        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, onBackPressedCallback)
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,
+            onBackPressedCallback
+        )
 
         return binding.root
     }
