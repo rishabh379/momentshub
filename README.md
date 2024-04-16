@@ -40,9 +40,7 @@ MomentsHub is an upgraded social media application designed to foster connection
 
 ## Screenshots
 
-## Screenshots
-
-<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
+<div class="screenshot-grid">
 
 <div>
     <img src="images/Screenshot_20240416_232513.jpg" alt="Screenshot 1" style="width: 150px;">
@@ -140,6 +138,22 @@ MomentsHub is an upgraded social media application designed to foster connection
 </div>
 
 </div>
+
+<style>
+    .screenshot-grid {
+        display: grid;
+        gap: 20px;
+        /* Define default grid layout for larger screens */
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+
+    /* Adjust grid layout for smaller screens */
+    @media screen and (max-width: 768px) {
+        .screenshot-grid {
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        }
+    }
+</style>
 
 ## Get Started
 
