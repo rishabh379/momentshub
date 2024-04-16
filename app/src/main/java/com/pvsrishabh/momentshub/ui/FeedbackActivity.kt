@@ -63,8 +63,9 @@ class FeedbackActivity : AppCompatActivity() {
         val subject = "Feedback/Issue Report" // Subject of the email
         val message = "Dear Developer, $text" // Body of the email
 
-        val intent = Intent(Intent.ACTION_SENDTO).apply {
-            data = Uri.parse("mailto:$recipientEmail")
+        val intent = Intent(Intent.ACTION_SEND).apply {
+            type = "text/plain"
+            putExtra(Intent.EXTRA_EMAIL, arrayOf(recipientEmail))
             putExtra(Intent.EXTRA_SUBJECT, subject)
             putExtra(Intent.EXTRA_TEXT, message)
         }
