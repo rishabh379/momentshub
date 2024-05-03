@@ -38,6 +38,10 @@ MomentsHub is an upgraded social media application designed to foster connection
 
 4. Firebase: MomentsHub integrates Firebase for backend services, including authentication, real-time database, cloud storage, and more, ensuring a robust and scalable infrastructure for the application.
 
+## Images
+
+![Image](images/example.jpg)
+
 ## Get Started
 
 To start exploring MomentsHub and connecting with others through shared moments, download the app from the App Store or Google Play Store and create your account today! Join our vibrant community and embark on a journey of discovery, creativity, and connection.

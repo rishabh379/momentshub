@@ -176,25 +176,7 @@ class HomeFragment : Fragment() {
             postList.addAll(tempList)
             postAdapter.notifyDataSetChanged()
         }
-
-        requireActivity().onBackPressedDispatcher.addCallback(
-            viewLifecycleOwner,
-            onBackPressedCallback
-        )
-
         return binding.root
-    }
-
-    private val onBackPressedCallback = object : OnBackPressedCallback(true) {
-        override fun handleOnBackPressed() {
-            if (doubleBackToExitPressedOnce) {
-                activity?.finish()
-            } else {
-                doubleBackToExitPressedOnce = true
-                Toast.makeText(activity, "Press again to exit", Toast.LENGTH_SHORT).show()
-                Handler().postDelayed({ doubleBackToExitPressedOnce = false }, 2000)
-            }
-        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

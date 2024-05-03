@@ -56,9 +56,10 @@ class ReelAdapter(var context: Context, var reelList: ArrayList<Reel>) :
                 currentUSER = it.toObject<User>()!!
             }
 
-        Picasso.get().load(reelList.get(position).profileLink).placeholder(R.drawable.user)
+        Picasso.get().load(reelList.get(position).profileLink).placeholder(R.drawable.night_user)
             .into(holder.binding.profile)
         holder.binding.caption.setText(reelList.get(position).caption)
+        holder.binding.userNameTv.setText(reelList.get(position).name)
         holder.binding.videoView.setVideoPath(reelList.get(position).videoUrl)
         holder.binding.videoView.setOnPreparedListener { mp ->
             holder.binding.progressBar.visibility = View.GONE

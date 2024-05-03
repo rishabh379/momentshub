@@ -6,12 +6,13 @@
     android:layout_height="match_parent"
     android:background="#ffffff"
     android:id="@+id/myConstraintLayout"
+    android:layout_centerInParent="true"
     tools:context=".ui.EditProfileActivity">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/profile_image"
-        android:layout_width="140dp"
-        android:layout_height="150dp"
+        android:layout_width="120dp"
+        android:layout_height="130dp"
         android:layout_marginTop="100dp"
         android:src="@drawable/user"
         android:contentDescription="Current Profile Photo"
@@ -21,8 +22,8 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/addImage"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
         android:src="@drawable/plus"
         app:civ_border_color="@color/white"
         app:civ_border_width="1dp"
@@ -42,6 +43,7 @@
         android:layout_marginTop="30dp"
         android:layout_marginEnd="32dp"
         android:hint="Name"
+        android:textColorHint="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -50,6 +52,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/black"
             android:singleLine="true"
             android:visibility="visible" />
 
@@ -61,6 +64,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:hint="Bio"
+        android:textColorHint="@color/black"
         app:layout_constraintEnd_toEndOf="@+id/name"
         app:layout_constraintStart_toStartOf="@+id/name"
         app:layout_constraintTop_toBottomOf="@+id/name">
@@ -68,6 +72,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/black"
             android:visibility="visible" />
 
     </com.google.android.material.textfield.TextInputLayout>

@@ -16,8 +16,8 @@ android {
         applicationId = "com.pvsrishabh.momentshub"
         minSdk = 26
         targetSdk = 34
-        versionCode = 32
-        versionName = "4.1"
+        versionCode = 34
+        versionName = "4.3"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 

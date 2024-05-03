@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginVertical="20dp"
         android:text="Comments"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/linear"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

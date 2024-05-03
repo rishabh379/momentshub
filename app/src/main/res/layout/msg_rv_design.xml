@@ -4,7 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="7dp"
+    android:layout_marginHorizontal="10dp"
+    android:layout_marginVertical="3dp"
     android:padding="5dp"
     android:elevation="7dp"
     app:cardCornerRadius="10dp">
@@ -15,11 +16,12 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profile_image"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
+            app:layout_constraintHorizontal_bias="0"
             android:src="@drawable/user"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -28,14 +30,17 @@
         <TextView
             android:id="@+id/name"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:layout_marginStart="16dp"
-            android:paddingStart="5dp"
+            android:layout_height="40dp"
+            android:layout_margin="7dp"
+            android:contentDescription="Navigate to User's Profile"
+            android:layout_marginStart="10dp"
             android:text="Name"
+            app:layout_constraintVertical_bias="1"
+            app:layout_constraintHorizontal_bias="0"
             app:layout_constraintBottom_toBottomOf="@+id/profile_image"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/profile_image"
-            app:layout_constraintTop_toTopOf="@id/profile_image"/>
+            app:layout_constraintTop_toTopOf="@id/profile_image" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

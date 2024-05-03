@@ -9,6 +9,7 @@ class Reel {
     var docId: String? = ""
     var likes: Long = 0
     var comments: Long? = 0
+    var name: String? = ""
 
     constructor()
 

@@ -9,6 +9,7 @@ import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
 import com.google.firebase.firestore.firestore
 import com.google.firebase.firestore.toObject
+import com.pvsrishabh.momentshub.R
 import com.pvsrishabh.momentshub.databinding.ActivityEditProfileBinding
 import com.pvsrishabh.momentshub.models.User
 import com.pvsrishabh.momentshub.utils.USER_NODE
@@ -47,7 +48,7 @@ class EditProfileActivity : AppCompatActivity() {
             .get().addOnSuccessListener {
                 user = it.toObject<User>()!!
                 if (!user.image.isNullOrEmpty()) {
-                    Picasso.get().load(user.image).into(binding.profileImage)
+                    Picasso.get().load(user.image).placeholder(R.drawable.user).into(binding.profileImage)
                 }
                 binding.name.editText?.setText(user.name)
                 if(user.bio == null){
@@ -83,5 +84,6 @@ class EditProfileActivity : AppCompatActivity() {
         // Perform any necessary actions on back press, such as closing resources or dialogs
         super.onBackPressed()
         startActivity(Intent(this@EditProfileActivity, HomeActivity::class.java))
+        finish()
     }
 }

@@ -15,8 +15,8 @@ class FollowActivity : AppCompatActivity(), SearchAdapter.ErrorHandlingListener 
 
     override fun handleErrorAndNavigate() {
         // Handle error and navigate to HomeActivity
-        finish()  // Finish the current activity or fragment
         startActivity(Intent(this, HomeActivity::class.java))
+        finish()  // Finish the current activity or fragment
     }
 
     private val binding by lazy {
